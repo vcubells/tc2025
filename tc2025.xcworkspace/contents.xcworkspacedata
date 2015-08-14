@@ -7,6 +7,12 @@
       <FileRef
          location = "group:apuntadores/apuntadores.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:estructuras_y_uniones/estructuras_y_uniones.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:enumeraciones/enumeraciones.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "group:Tema_3_Procesos"
