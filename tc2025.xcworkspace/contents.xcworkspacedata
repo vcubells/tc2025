@@ -13,6 +13,15 @@
       <FileRef
          location = "group:enumeraciones/enumeraciones.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:longitud_cadena/longitud_cadena.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:invertir_cadena/invertir_cadena.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:copiar_cadena/copiar_cadena.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "group:Tema_3_Procesos"
