@@ -25,6 +25,12 @@
       <FileRef
          location = "group:biblioteca/biblioteca.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:menu_opciones/menu_opciones.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:ordenamiento/ordenamiento.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "group:Tema_3_Procesos"
