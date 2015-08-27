@@ -31,6 +31,9 @@
       <FileRef
          location = "group:ordenamiento/ordenamiento.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:ordenamiento_generico/ordenamiento_generico.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "group:Tema_3_Procesos"
