@@ -70,7 +70,10 @@ void escribir(int fd)
     FILE * file;
     file = fdopen(fd, "w");
     
-    while (1) {
+    sleep(10);
+    
+    int n = 0;
+    while (n++ < 10) {
         printf(" ---->>>> Soy el padre y estoy escribiendo\n");
         fprintf(file, "Esto estaba en el PIPE \n");
     }
