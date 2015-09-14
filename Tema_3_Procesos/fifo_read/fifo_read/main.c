@@ -1,6 +1,6 @@
 //
 //  main.c
-//  fifo_write
+//  fifo_read
 //
 //  Created by Vicente Cubells Nonell on 07/09/15.
 //  Copyright (c) 2015 Vicente Cubells Nonell. All rights reserved.
@@ -15,25 +15,18 @@
 
 int main(int argc, const char * argv[])
 {
+    int fd;
     
-    int error = mkfifo("/Users/vcubells/fifo", 0777);
+    fd = open("/Users/vcubells/fifo", O_RDONLY);
     
-    if (error) {
-        printf("Error al crear el FIFO\n");
-        exit(-1);
-    }
+    int i = -1;
     
-    int fd = open("/Users/vcubells/fifo", O_WRONLY);
-    
-    int i = 0;
-    
-    while (i++ < 10) {
-        write(fd, &i, sizeof(int));
+    while (1) {
+        read(fd, &i, sizeof(int));
+        printf("%d\n", i);
     }
     
     close(fd);
-    unlink("/Users/vcubells/fifo");
     
     return 0;
 }
-
