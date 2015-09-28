@@ -1,10 +1,19 @@
 //
-//  main.c
+//  cliente.c
+//  factorial_sockets
+//
+//  Created by Vicente Cubells Nonell on 28/09/15.
+//  Copyright © 2015 Vicente Cubells Nonell. All rights reserved.
+//
+
+//
+//  cliente.c
 //  sockets
 //
 //  Created by Vicente Cubells Nonell on 14/09/15.
 //  Copyright (c) 2015 Vicente Cubells Nonell. All rights reserved.
 //
+
 
 
 #include <stdio.h>
@@ -21,7 +30,7 @@ int main(int argc, const char * argv[]) {
     struct sockaddr_in direccion;
     char buffer[1000];
     
-    int servidor, cliente;
+    int cliente;
     
     int leidos, escritos;
     
@@ -31,41 +40,36 @@ int main(int argc, const char * argv[]) {
     }
     
     //Crear el socket
-    servidor = socket(PF_INET, SOCK_STREAM, 0);
+    cliente = socket(PF_INET, SOCK_STREAM, 0);
     
-    // Enlace con el socket
+    // Establecer conexión
     direccion.sin_port = htons(TCP_PORT);
     direccion.sin_family = AF_INET;
     inet_aton(argv[1], &direccion.sin_addr);
     
-    bind(servidor, (struct sockaddr *) &direccion, sizeof(direccion));
-    
-    // Escuchar a los clientes
-    listen(servidor, 10);
+    int estado = connect(cliente, (struct sockaddr *) &direccion, sizeof(direccion));
     
     // Comunicación
-    socklen_t tamano = sizeof(direccion);
     
-    cliente = accept(servidor, (struct sockaddr *) &direccion, &tamano);
-    
-    if (cliente >= 0) {
-        printf("Aceptando conexiones en %s:%d \n",
+    if (estado == 0) {
+        printf("Conectado a %s:%d \n",
                inet_ntoa(direccion.sin_addr),
                ntohs(direccion.sin_port));
         
-        // Leer de socket y escribir en pantalla
-        while (leidos = read(cliente, &buffer, sizeof(buffer))) {
-            write(fileno(stdout), &buffer, leidos);
-            
-            leidos = read(fileno(stdin), &buffer, sizeof(buffer));
+        // Leer de teclado y escribir en socket
+        while (leidos = read(fileno(stdin), &buffer, sizeof(buffer))) {
             write(cliente, &buffer, leidos);
-        }     
+            
+            leidos = read(cliente, &buffer, sizeof(buffer));
+            write(fileno(stdout), &buffer, leidos);
+        }
     }
     
     // Cerrar el socket
-    
-    close(servidor);
     close(cliente);
     
     return 0;
 }
+
+
+

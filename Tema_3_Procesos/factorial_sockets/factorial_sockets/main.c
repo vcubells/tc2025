@@ -1,20 +1,54 @@
 //
 //  main.c
-//  sockets
+//  factorial_sockets
 //
-//  Created by Vicente Cubells Nonell on 14/09/15.
-//  Copyright (c) 2015 Vicente Cubells Nonell. All rights reserved.
+//  Created by Vicente Cubells Nonell on 28/09/15.
+//  Copyright © 2015 Vicente Cubells Nonell. All rights reserved.
 //
 
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 
 #define TCP_PORT 8000
+
+int factorial (int num);
+
+/* reverse:  reverse string s in place */
+void reverse(char s[])
+{
+    int i, j;
+    char c;
+    
+    for (i = 0, j = strlen(s)-1; i<j; i++, j--) {
+        c = s[i];
+        s[i] = s[j];
+        s[j] = c;
+    }
+}
+
+void itoa(int n, char s[])
+{
+    int i, sign;
+    
+    if ((sign = n) < 0)  /* record sign */
+        n = -n;          /* make n positive */
+    i = 0;
+    do {       /* generate digits in reverse order */
+        s[i++] = n % 10 + '0';   /* get next digit */
+    } while ((n /= 10) > 0);     /* delete it */
+    if (sign < 0)
+        s[i++] = '-';
+    s[i] = '\0';
+    reverse(s);
+}
+
+
 
 int main(int argc, const char * argv[]) {
     
@@ -48,6 +82,8 @@ int main(int argc, const char * argv[]) {
     
     cliente = accept(servidor, (struct sockaddr *) &direccion, &tamano);
     
+    int fact;
+    
     if (cliente >= 0) {
         printf("Aceptando conexiones en %s:%d \n",
                inet_ntoa(direccion.sin_addr),
@@ -57,9 +93,15 @@ int main(int argc, const char * argv[]) {
         while (leidos = read(cliente, &buffer, sizeof(buffer))) {
             write(fileno(stdout), &buffer, leidos);
             
-            leidos = read(fileno(stdin), &buffer, sizeof(buffer));
-            write(cliente, &buffer, leidos);
-        }     
+            fact = factorial(atoi(buffer));
+            
+            printf("Factorial = %d\n", fact);
+            
+            itoa(fact, buffer);
+            
+           //leidos = write(fileno(stdin), &buffer, sizeof(buffer));
+            write(cliente, &buffer, sizeof(int));
+        }
     }
     
     // Cerrar el socket
@@ -69,3 +111,14 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
+
+int factorial (int num)
+{
+    int f = 1;
+    int i;
+    for(i = 2; i <= num; ++i)
+        f *= i;
+    
+    return f;
+}
+
