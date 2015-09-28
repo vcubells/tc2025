@@ -38,6 +38,39 @@
    <Group
       location = "group:Tema_3_Procesos"
       name = "Tema_3_Procesos">
+      <FileRef
+         location = "group:factorial_sockets/factorial_sockets.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:creando_procesos/creando_procesos.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:argumentos_cortos/argumentos_cortos.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:argumentos_largos/argumentos_largos.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:pipe/pipe.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:popen/popen.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:fifo_write/fifo_write.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:fifo_read/fifo_read.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:factorial_pipe/factorial_pipe.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:sockets/sockets.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:sockets_varios_clientes/sockets_varios_clientes.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "group:Tema_4_Sen&#x303;ales"
