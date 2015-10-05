@@ -11,6 +11,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #define TCP_PORT 8000
 
@@ -21,7 +22,7 @@ int main(int argc, const char * argv[])
     
     int servidor, cliente;
     
-    int leidos, escritos;
+    ssize_t leidos, escritos;
     int continuar = 1;
     pid_t pid;
     

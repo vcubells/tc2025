@@ -12,6 +12,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #define TCP_PORT 8000
 
@@ -22,7 +23,7 @@ int main(int argc, const char * argv[])
     
     int cliente;
     
-    int leidos, escritos;
+    ssize_t leidos, escritos;
     
     if (argc != 2) {
         printf("Use: %s IP_Servidor \n", argv[0]);
@@ -45,7 +46,7 @@ int main(int argc, const char * argv[])
                ntohs(direccion.sin_port));
         
         // Escribir datos en el socket
-        while (leidos = read(fileno(stdin), &buffer, sizeof(buffer))) {
+        while ((leidos = read(fileno(stdin), &buffer, sizeof(buffer)))) {
             write(cliente, &buffer, leidos);
             
             /* Lee del buffer y escribe en pantalla */

@@ -75,6 +75,9 @@
    <Group
       location = "group:Tema_4_Sen&#x303;ales"
       name = "Tema_4_Sen&#x303;ales">
+      <FileRef
+         location = "group:ejemplo_SIGINT/ejemplo_SIGINT.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "group:Tema_5_Concurrencia"
