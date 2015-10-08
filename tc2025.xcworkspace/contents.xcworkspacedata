@@ -93,6 +93,18 @@
       <FileRef
          location = "group:bloquear_alarm/bloquear_alarm.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:varios_manejadores_SIGINT/varios_manejadores_SIGINT.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:varias_sen&#x303;ales/varias_sen&#x303;ales.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:raise/raise.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:sigaction_flags/sigaction_flags.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "group:Tema_5_Concurrencia"
