@@ -81,6 +81,9 @@
       <FileRef
          location = "group:sigaction/sigaction.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:restablecer_manejador/restablecer_manejador.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "group:Tema_5_Concurrencia"
