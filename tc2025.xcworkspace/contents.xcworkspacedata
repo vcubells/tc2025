@@ -84,6 +84,9 @@
       <FileRef
          location = "group:restablecer_manejador/restablecer_manejador.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:conjunto_sen&#x303;ales/conjunto_sen&#x303;ales.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "group:Tema_5_Concurrencia"
