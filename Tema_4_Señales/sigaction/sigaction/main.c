@@ -8,13 +8,14 @@
 
 #include <stdio.h>
 #include <signal.h>
+#include <stdlib.h>
 
 void gestor(int s)
 {
     printf("Se recibió la señal SIGINT\n");
 }
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char * argv[]) 
 {
     
     struct sigaction senal;
