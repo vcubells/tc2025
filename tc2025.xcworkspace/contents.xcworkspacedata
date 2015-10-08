@@ -87,6 +87,9 @@
       <FileRef
          location = "group:conjunto_sen&#x303;ales/conjunto_sen&#x303;ales.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:bloquear_conjunto_sen&#x303;ales/bloquear_conjunto_sen&#x303;ales.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "group:Tema_5_Concurrencia"
