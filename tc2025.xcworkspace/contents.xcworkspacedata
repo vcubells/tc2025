@@ -78,6 +78,9 @@
       <FileRef
          location = "group:ejemplo_SIGINT/ejemplo_SIGINT.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:sigaction/sigaction.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "group:Tema_5_Concurrencia"
