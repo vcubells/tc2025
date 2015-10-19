@@ -112,6 +112,9 @@
       <FileRef
          location = "group:ejemplo_pthread/ejemplo_pthread.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:problema_con_variable_global/problema_con_variable_global.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "group:Tema_6_Paralelismo"
