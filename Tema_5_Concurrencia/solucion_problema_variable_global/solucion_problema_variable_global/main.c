@@ -1,11 +1,10 @@
 //
 //  main.c
-//  problema_con_variable_global
+//  solucion_problema_variable_global
 //
 //  Created by Vicente Cubells Nonell on 19/10/15.
 //  Copyright © 2015 Vicente Cubells Nonell. All rights reserved.
 //
-
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,7 +13,10 @@
 #define OPERACIONES 100
 #define NHILOS 2
 
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+
 int suma = 0;
+int resta = OPERACIONES;
 
 void * sumar(void * arg)
 {
@@ -24,10 +26,18 @@ void * sumar(void * arg)
     int temp;
     
     for (i = 0; i < OPERACIONES; ++i) {
-
+        
+        /* Inicia Región crítica */
+        pthread_mutex_lock(&mutex); // DOWN
+        
         temp = suma;
         /* Podría haber un cambio de contexto */
         suma = suma + 1;
+        
+        resta = resta + 1;
+        
+        /* Termina región crítica */
+        pthread_mutex_unlock(&mutex); // UP
     }
     
     pthread_exit(0);
@@ -37,16 +47,25 @@ void * restar(void * arg)
 {
     int tid = (int) arg;
     int i;
-
+    
     int temp;
     
     for (i = 0; i < OPERACIONES; ++i) {
         
+        /* Inicia Región crítica */
+        pthread_mutex_lock(&mutex);
+        
         temp = suma;
         /* Podría haber un cambio de contexto */
+        
         suma = suma - 1;
+        
+        resta = resta - 1 ;
+        
+        /* Termina región crítica */
+        pthread_mutex_unlock(&mutex);
     }
-
+    
     
     pthread_exit(0);
 }
@@ -76,7 +95,7 @@ int main(int argc, const char * argv[])
     
     printf("Soy el proceso principal y ya terminaron todos los hilos...\n");
     
-    printf("Suma = %d y debía ser %d \n", suma, 0 );
+    printf("Suma = %d y Resta = %d \n", suma, resta );
     
     free(tid);
     

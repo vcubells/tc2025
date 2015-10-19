@@ -115,6 +115,15 @@
       <FileRef
          location = "group:problema_con_variable_global/problema_con_variable_global.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:solucion_problema_variable_global/solucion_problema_variable_global.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:problema_inversion_mutexes/problema_inversion_mutexes.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:solucion_problema_mutexes_inversos/solucion_problema_mutexes_inversos.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "group:Tema_6_Paralelismo"
