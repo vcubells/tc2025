@@ -124,6 +124,12 @@
       <FileRef
          location = "group:solucion_problema_mutexes_inversos/solucion_problema_mutexes_inversos.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:productor_consumidor/productor_consumidor.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:multiples_productores_consumidores/multiples_productores_consumidores.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "group:Tema_6_Paralelismo"
