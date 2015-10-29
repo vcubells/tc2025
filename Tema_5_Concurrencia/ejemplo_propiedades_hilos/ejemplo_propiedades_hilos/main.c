@@ -54,7 +54,7 @@ void * hilo(void * arg)
     
     numero = (int *) pthread_getspecific(tsd);
     
-    printf("TSD en %s (%ld) = %d antes de modificar \n",
+    printf("TSD en %s (%zd) = %d antes de modificar \n",
            valores->nombre,
            tid,
            *numero);
@@ -68,7 +68,8 @@ int main(int argc, const char * argv[])
     pthread_t tid1, tid2;
     param p1, p2;
     pthread_attr_t attr;
-    int detachstate, scope, sched, algoritmo, stacksize, prioridad;
+    int detachstate, scope, sched, algoritmo;
+    size_t stacksize;
     
     
     p1.tid = 1;
@@ -92,7 +93,7 @@ int main(int argc, const char * argv[])
     printf("Valores iniciales de atributos: \n");
     printf("DETACHSTATE = %d \n", detachstate);
     printf("SCOPE = %d \n", scope);
-    printf("STACKSIZE = %d bytes\n", stacksize);
+    printf("STACKSIZE = %zu bytes\n", stacksize);
     printf("SCHEDPOLICY = %d \n", algoritmo);
     printf("INHERSCHED = %d \n", sched);
     
@@ -115,7 +116,7 @@ int main(int argc, const char * argv[])
     printf("Valores iniciales de atributos: \n");
     printf("DETACHSTATE = %d \n", detachstate);
     printf("SCOPE = %d \n", scope);
-    printf("STACKSIZE = %d bytes\n", stacksize);
+    printf("STACKSIZE = %zu bytes\n", stacksize);
     printf("SCHEDPOLICY = %d \n", algoritmo);
     printf("INHERSCHED = %d \n", sched);
     
