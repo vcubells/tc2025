@@ -22,7 +22,7 @@ int main(int argc, const char * argv[]) {
     cadena = (char *) malloc(sizeof(char) * longitud);
     
     printf("Entre una cadena: ");
-    scanf("%s", cadena);
+    scanf("%[^n]", cadena);
     
     // Obtener longitud de una cadena con contador
     

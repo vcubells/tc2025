@@ -22,7 +22,9 @@ int main(int argc, char **argv) {
     cadena = (char *) malloc(sizeof(char) * longitud);
     
     printf("Entre una cadena: ");
-    scanf("%s", cadena);
+    scanf("%[^n]", cadena);
+
+    //fgets(cadena, longitud, stdin);
     
     
     // Invertir una cadena
