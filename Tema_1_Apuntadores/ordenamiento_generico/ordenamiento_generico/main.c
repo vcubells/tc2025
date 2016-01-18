@@ -177,7 +177,6 @@ void swapInt(void * pa , void * pb )
     
 }
 
-
 /* Implementación de funciones callback para flotantes */
 
 int ascFloat(void * pa, void * pb)
