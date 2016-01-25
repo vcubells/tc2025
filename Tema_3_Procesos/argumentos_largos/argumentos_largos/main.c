@@ -11,7 +11,10 @@
 #include <getopt.h>
 
 /* Bandera utilizada por ‘--detalles’. */
-static int detalles_flag;
+static int detalles_flag = 0;
+
+/* Bandera utilizada por ‘--resumen’. */
+static int resumen_flag = 0;
 
 int main(int argc, char * argv[]) {
 
@@ -23,7 +26,7 @@ int main(int argc, char * argv[]) {
         {
             /* En estas opciones se establece una bandera */
             {"detalles", no_argument,       &detalles_flag, 1},
-            {"resumen",   no_argument,       &detalles_flag, 0},
+            {"resumen",   no_argument,       &resumen_flag, 1},
             /* Estas opciones no utilizan una bandera, las identificamos por sus índices */
             {"insertar",     no_argument,       0, 'i'},
             {"adicionar",  	no_argument,       0, 'a'},
@@ -86,6 +89,9 @@ int main(int argc, char * argv[]) {
     /* En lugar de reportar  ‘--detalles'  y ‘--resumen', reportamos su estado final */
     if (detalles_flag)
         puts ("bandera detalles está activa");
+    
+    if (resumen_flag)
+        puts ("bandera resumen está activa");
     
     /* Imprimir cualquier argumento restante (no son opciones) */
     if (optind < argc)
