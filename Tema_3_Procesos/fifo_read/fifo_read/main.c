@@ -16,13 +16,13 @@
 int main(int argc, const char * argv[])
 {
     int fd;
+    int leidos = 1;
     
     fd = open("/Users/vcubells/fifo", O_RDONLY);
     
     int i = -1;
     
-    while (1) {
-        read(fd, &i, sizeof(int));
+    while (leidos = read(fd, &i, sizeof(int))) {
         printf("%d\n", i);
     }
     
