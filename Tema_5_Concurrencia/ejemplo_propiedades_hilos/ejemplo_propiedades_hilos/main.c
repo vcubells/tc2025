@@ -122,7 +122,7 @@ int main(int argc, const char * argv[])
     
     pthread_create(&tid2, &attr, hilo, (void *) &p2);
     
-    if (pthread_equal(tid1, tid1)) {
+    if (pthread_equal(tid1, tid2)) {
         printf(" Son iguales \n");
     }
     else {

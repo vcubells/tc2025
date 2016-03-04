@@ -34,10 +34,22 @@
       <FileRef
          location = "group:ordenamiento_generico/ordenamiento_generico.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:ejercicio_personas/ejercicio_personas.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:matriz/matriz.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:apuntadores_a_funciones/apuntadores_a_funciones.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "group:Tema_3_Procesos"
       name = "Tema_3_Procesos">
+      <FileRef
+         location = "group:pull_request/pull_request.xcodeproj">
+      </FileRef>
       <FileRef
          location = "group:factorial_sockets/factorial_sockets.xcodeproj">
       </FileRef>
@@ -70,6 +82,12 @@
       </FileRef>
       <FileRef
          location = "group:sockets_varios_clientes/sockets_varios_clientes.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:ejemplo_factorial/ejemplo_factorial.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:ejemplo_integral/ejemplo_integral.xcodeproj">
       </FileRef>
    </Group>
    <Group
@@ -130,9 +148,27 @@
       <FileRef
          location = "group:multiples_productores_consumidores/multiples_productores_consumidores.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:ejemplo_propiedades_hilos/ejemplo_propiedades_hilos.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:ejemplo_sen&#x303;ales_entre_hilos/ejemplo_sen&#x303;ales_entre_hilos.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "group:Tema_6_Paralelismo"
       name = "Tema_6_Paralelismo">
+      <FileRef
+         location = "group:omp_parallel/omp_parallel.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:mpi_basico/mpi_basico.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:mpi_suma_reduccion/mpi_suma_reduccion.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:mpi_suma_reduccion_openmp/mpi_suma_reduccion_openmp.xcodeproj">
+      </FileRef>
    </Group>
 </Workspace>

@@ -75,7 +75,7 @@ void escribir(int fd)
     int n = 0;
     while (n++ < 10) {
         printf(" ---->>>> Soy el padre y estoy escribiendo\n");
-        fprintf(file, "Esto estaba en el PIPE \n");
+        fprintf(file, "%d", n);
     }
     
     fclose(file);

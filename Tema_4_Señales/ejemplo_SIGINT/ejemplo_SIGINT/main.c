@@ -16,7 +16,7 @@ void manejador(int ids)
 
 int main(int argc, const char * argv[]) {
     
-    if (signal(SIGINT, SIG_DFL) == SIG_ERR) {
+    if (signal(SIGKILL, manejador) == SIG_ERR) {
         printf("ERROR: No se pudo establecer el manejador de la señal\n");
     }
     
@@ -26,7 +26,7 @@ int main(int argc, const char * argv[]) {
     
     while (k-- > 0) {
         printf(" +++ %d y contando\n", k);
-        sleep(1);
+        sleep(5);
     }
     
     return 0;

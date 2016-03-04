@@ -15,8 +15,8 @@
 #define BSIZE 10
 #define N 100
 
-#define PRODUCTORES 5
-#define CONSUMIDORES 3
+#define PRODUCTORES 10
+#define CONSUMIDORES 10
 
 int elementos[BSIZE];
 
