@@ -9,16 +9,24 @@
 #include <stdio.h>
 
 enum DiasSemana {
-    Domingo, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado
+    Domingo,
+    Lunes,
+    Martes,
+    Miercoles,
+    Jueves,
+    Viernes,
+    Sabado
 };
 
 int main(int argc, const char * argv[]) {
     
     enum DiasSemana dia;
     
+    char * nombres[7] = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
+    
     for (dia = Domingo; dia <= Sabado; ++dia)
     {
-        printf("%d, ", dia);
+        printf("%d - %s \n", dia, nombres[dia]);
     }
     return 0;
 }

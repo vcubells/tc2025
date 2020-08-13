@@ -10,17 +10,51 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define N 60
+
+/*
+ operador de dirección & -> Regresa una dirección de memoria
+ operador de indirección * -> Obtiene el contenido de una dirección de memoria
+ 
+            #FFFF
+ 
+ ptr_n ->   #FF00   - n - 50
+ 
+            #00FF
+ 
+            #0000  -  ptr_n - #FF00
+ */
+
+
 void imprime(int * , int *);
 
 int main(int argc, const char * argv[]) {
-    int n = 0;
+    int n = 50;
     
+    int * ptr_n = &n;
+    
+    void * ptr_g;           // Apuntador genérico
+    
+    ptr_g = ptr_n;          // Apunta a un int
+    
+    float flot = 4.5;
+    
+    float * ptr_f = &flot;  // Apunta a un float
+    
+    ptr_g = ptr_f;
+    
+    ptr_g = &flot;          // Apunta a un float
+    
+    ptr_g = &n;             // Apunta a un int
+    
+    ptr_g = &ptr_n;
+    
+
     /* Leer el número de elementos */
     printf("Entra la cantidad de elementos: ");
     scanf("%d", &n);
     
     /* Reservar memoria */
-    
     int * numeros = (int *) malloc(n * sizeof(int));
     
     /* Generar números aleatorios */

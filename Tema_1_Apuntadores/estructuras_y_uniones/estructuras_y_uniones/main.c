@@ -26,6 +26,7 @@ int main(int argc, const char * argv[])
 {
     
     persona e;
+    
     persona_u u;
     
     strcpy(e.nombre, "Juan");
@@ -37,10 +38,11 @@ int main(int argc, const char * argv[])
     printf("%s %s (%d)\n\n", e.nombre, e.apellidos, e.edad);
     
     
-    strcpy(u.nombre, "Juan");
-    strcpy(u.apellidos, "Perez");
-    u.edad = 89;
-    
+    strcpy(u.nombre, "Juan");           // u.nombre = "Juan"
+    strcpy(u.apellidos, "Perez");       // u.nombre = u.apellidos = "Perez"
+    u.edad = 89;                        // u.nombre = u.apellidos = u.edad -> 89
+
+
     printf(" Valores en la unión:\n\n");
     
     printf("%s %s (%d)\n\n", u.nombre, u.apellidos, u.edad);
