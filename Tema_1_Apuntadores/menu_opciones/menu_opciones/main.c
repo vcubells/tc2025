@@ -40,19 +40,19 @@ int main(int argc, const char * argv[]) {
 //        case 1:
 //            abrir(opcion);
 //            break;
-//        
+//
 //        case 2:
 //            guardar(opcion);
 //            break;
-//            
+//
 //        case 3:
 //            salir(opcion);
 //            break;
-//            
+//
 //        case 4:
 //            copiar(opcion);
 //            break;
-//            
+//
 //        default:
 //            printf("Opción no válida\n");
 //            break;

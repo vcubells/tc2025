@@ -24,7 +24,7 @@ int main(int argc, const char * argv[])
     cadena = (char *) malloc(sizeof(char) * longitud);
     
     printf("Entre una cadena: ");
-    scanf("%s", cadena);
+    scanf(" %s", cadena);
     
     
     //Copiar una cadena a otra;
@@ -43,6 +43,8 @@ char * copiar(char * cadena)
     long int c = strlen(cadena);
     
     char * destino = (char *) malloc(sizeof(char) * c);
+    
+    // char * destino[20] == char * destino = (char *) malloc(sizeof(char) * 20);
     
     char * p = cadena;
     char * d = destino;

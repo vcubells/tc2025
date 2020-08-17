@@ -29,7 +29,7 @@ int main(int argc, const char * argv[]) {
         printf("%4d", *p);
     }
     
-    ordena(valores, asc);
+    ordena(valores, desc);
     
     
     printf("\n\n--- Ordenados ---\n\n");

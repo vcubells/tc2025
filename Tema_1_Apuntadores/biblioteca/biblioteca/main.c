@@ -14,13 +14,19 @@ typedef struct {
     int paginas;
     char * titulo;
     char * autor;
-    
 } libro;
 
+/*
+libro l;
+l.paginas;
+
+libro * p;
+p->paginas;
+(*p).paginas;
+*/
 
 int main(int argc, const char * argv[])
 {
-    
     libro * biblioteca;
     libro * aux;
     

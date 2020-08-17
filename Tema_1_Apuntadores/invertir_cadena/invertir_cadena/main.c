@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
     cadena = (char *) malloc(sizeof(char) * longitud);
     
     printf("Entre una cadena: ");
-    scanf("%[^n]", cadena);
+    scanf(" %[^\n]", cadena);
 
     //fgets(cadena, longitud, stdin);
     
