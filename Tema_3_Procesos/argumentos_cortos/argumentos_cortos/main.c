@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int main(int argc, const char * argv[]) {
+int main(int argc, char * const * argv) {
 
     int aflag = 0;
     int bflag = 0;

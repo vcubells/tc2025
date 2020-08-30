@@ -48,9 +48,6 @@
       location = "group:Tema_3_Procesos"
       name = "Tema_3_Procesos">
       <FileRef
-         location = "group:pull_request/pull_request.xcodeproj">
-      </FileRef>
-      <FileRef
          location = "group:factorial_sockets/factorial_sockets.xcodeproj">
       </FileRef>
       <FileRef

@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N 20
+#define N 10
 
 /* Tipos de funciones */
 
@@ -77,7 +77,6 @@ int main(int argc, const char * argv[])
     /* Ordenar números flotantes */
     
     float * vectorf = (float *) malloc(N * sizeof(float));
-    
     
     float * auxf = vectorf;
     float * lastf = vectorf + N;

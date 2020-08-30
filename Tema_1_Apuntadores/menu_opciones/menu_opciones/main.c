@@ -59,8 +59,9 @@ int main(int argc, const char * argv[]) {
 //    }
     
     /* Apuntadores a funciones */
-    
+    /* nombre(opcion) */
     (*(menu+opcion-1))(opcion);
+    // menu[opcion-1](opcion);
     
     free(menu);
     
