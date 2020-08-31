@@ -18,10 +18,11 @@ int main(int argc, char * const * argv) {
     char *cvalue = NULL;
     int index;
     int c;
+    int help = 0;
     
     opterr = 0;
     
-    while ((c = getopt (argc, argv, "abc:")) != -1)
+    while ((c = getopt (argc, argv, "abc:h")) != -1)
         switch (c)
     {
         case 'a':
@@ -32,6 +33,9 @@ int main(int argc, char * const * argv) {
             break;
         case 'c':
             cvalue = optarg;
+            break;
+        case 'h':
+            help = 1;
             break;
         case '?':
             if (optopt == 'c')
@@ -53,6 +57,17 @@ int main(int argc, char * const * argv) {
     for (index = optind; index < argc; index++)
         printf ("El argumento no es una opción válida %s\n", argv[index]);
     
+    if (help == 1) {
+        print_help();
+    }
+    
     return 0;
     
+}
+
+void print_help()
+{
+    printf("Use: ./a.out [-a] [-b] [-c value] [-h]\n");
+    printf("\n-- Opciones:\n");
+    printf("-a : Visualizar todos\n-b : Buscar un elemento\n-c : Visualizar archivo indicado como valor\n-h : Ayuda\n");
 }
