@@ -11,6 +11,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+void print_help();
+
 int main(int argc, char * const * argv) {
 
     int aflag = 0;
@@ -67,7 +69,7 @@ int main(int argc, char * const * argv) {
 
 void print_help()
 {
-    printf("Use: ./a.out [-a] [-b] [-c value] [-h]\n");
-    printf("\n-- Opciones:\n");
+    printf("\nUse: ./a.out [-a] [-b] [-c value] [-h]\n");
+    printf("\nOpciones:\n");
     printf("-a : Visualizar todos\n-b : Buscar un elemento\n-c : Visualizar archivo indicado como valor\n-h : Ayuda\n");
 }
