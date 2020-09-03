@@ -12,7 +12,7 @@
 #include <sys/wait.h>
 #include <time.h>
 
-#define N 1000000
+#define N 10
 
 int suma(int *, int, int);
 void print(int *, int, int);
@@ -31,7 +31,7 @@ int main(int argc, const char * argv[]) {
     int * temp = numeros;
     int * last = numeros + N;
     for (; temp < last; ++temp) {
-        *temp = rand() % 2;
+        *temp = 1;
         //printf("%3d ", *temp);
     }
     
