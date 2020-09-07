@@ -12,7 +12,7 @@
 
 void leer(int * fd);
 void escribir(int * fd);
-int factorial (int num);
+unsigned long int factorial (int num);
 
 int main(int argc, char **argv)
 {
@@ -54,7 +54,7 @@ void leer(int * fd)
     {
         close(fd[1]);
         read(fd[0], &c, sizeof(int));
-        printf("---  Recibí f(%d) = %d  \n", c, factorial(c));
+        printf("---  Recibí f(%d) = %lu  \n", c, factorial(c));
     }
     
 }
@@ -75,9 +75,9 @@ void escribir(int * fd)
     
 }
 
-int factorial (int num)
+unsigned long int factorial (int num)
 {
-    int f = 1;
+    unsigned long int f = 1;
     int i;
     for(i = 2; i <= num; ++i)
         f *= i;

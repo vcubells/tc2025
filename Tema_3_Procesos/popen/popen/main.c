@@ -17,7 +17,7 @@ int main(int argc, const char * argv[])
     
     file = popen("cat", "w");
     
-    while(1)
+    while( i < 10 )
     {
         fprintf(file, "%d\n", ++i);
     }

@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 void leer(int fd);
 void escribir(int fd);
@@ -31,7 +32,7 @@ int main(int argc, const char * argv[])
         /* Hijo */
         close(tuberia[1]);
         
-        printf(" Soy el hijo y estoy leyendo ... \n");
+        printf(" Soy el hijo y voy a leer ... \n");
         
         leer(tuberia[0]);
     }
@@ -40,7 +41,7 @@ int main(int argc, const char * argv[])
         
         close(tuberia[0]);
         
-        printf(" Soy el padre y estoy escribiendo ... \n");
+        printf(" Soy el padre y voy a escribir ... \n");
         
         escribir(tuberia[1]);
     }
@@ -57,7 +58,7 @@ void leer(int fd)
     
     while ( (c = fgetc(file)) != EOF )
     {
-        printf("<<<<<< ------ Leyendo del PIPE : ");
+        printf("<<<<<< ------ Soy el hijo leyendo del PIPE : ");
         putchar(c);
         printf("\n");
     }
@@ -70,11 +71,11 @@ void escribir(int fd)
     FILE * file;
     file = fdopen(fd, "w");
     
-    sleep(10);
+    sleep(1);
     
     int n = 0;
     while (n++ < 10) {
-        printf(" ---->>>> Soy el padre y estoy escribiendo\n");
+        printf(" ---->>>> Soy el padre escribiendo en el PIPE %d:\n", n);
         fprintf(file, "%d", n);
     }
     
