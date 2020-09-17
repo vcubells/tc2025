@@ -47,7 +47,7 @@ int main(int argc, const char * argv[]) {
     socklen_t tamano = sizeof(direccion);
     
     cliente = accept(servidor, (struct sockaddr *) &direccion, &tamano);
-    
+
     if (cliente >= 0) {
         printf("Aceptando conexiones en %s:%d \n",
                inet_ntoa(direccion.sin_addr),
@@ -61,7 +61,7 @@ int main(int argc, const char * argv[]) {
             write(cliente, &buffer, leidos);
         }     
     }
-    
+
     // Cerrar el socket
     
     close(servidor);

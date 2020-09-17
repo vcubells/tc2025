@@ -59,27 +59,30 @@ int main(int argc, const char * argv[]) {
     
     int leidos, escritos;
     
+    /* Leer la IP donde va a escuchar el servidor */
     if (argc != 2) {
         printf("Error. Use: %s A.B.C.D \n", argv[0]);
         exit(-1);
     }
     
-    //Crear el socket
+    /* Crear el socket */
     servidor = socket(PF_INET, SOCK_STREAM, 0);
     
-    // Enlace con el socket
+    /* Crear la struct con los datos */
     direccion.sin_port = htons(TCP_PORT);
     direccion.sin_family = AF_INET;
     inet_aton(argv[1], &direccion.sin_addr);
     
+    /* Establecer enlace entre IP y Puerto */
     bind(servidor, (struct sockaddr *) &direccion, sizeof(direccion));
     
-    // Escuchar a los clientes
+    /* Abrir el socker en modo escucha con máximo 10 clientes */
     listen(servidor, 10);
     
-    // Comunicación
+    /* Obtener tamaño de la struct */
     socklen_t tamano = sizeof(direccion);
     
+    /* Aceptar conexiones de los clientes */
     cliente = accept(servidor, (struct sockaddr *) &direccion, &tamano);
     
     int fact;
@@ -89,24 +92,30 @@ int main(int argc, const char * argv[]) {
                inet_ntoa(direccion.sin_addr),
                ntohs(direccion.sin_port));
         
-        // Leer de socket y escribir en pantalla
+        /* Leer del socket */
         while (leidos = read(cliente, &buffer, sizeof(buffer))) {
-            write(fileno(stdout), &buffer, leidos);
             
-            fact = factorial(atoi(buffer));
+            /* Convertir a int */
+            int numero = atoi(buffer);
             
-            printf("Factorial = %d\n", fact);
+            /* Mostrar por pantalla el número recibido */
+            printf("Número recibido: %d\n", numero);
             
+            /* Calcular el factorial */
+            fact = factorial(numero);
+            
+            /* Convertir el factorial a un string */
             itoa(fact, buffer);
             
-           //leidos = write(fileno(stdin), &buffer, sizeof(buffer));
-            write(cliente, &buffer, sizeof(int));
+            /* Escribir en el socket */
+            write(cliente, buffer, sizeof(int));
         }
     }
     
-    // Cerrar el socket
-    
+    /* Cerrar el socket del servidor */
     close(servidor);
+    
+    /* Cerrar el socket del cliente */
     close(cliente);
     
     return 0;
