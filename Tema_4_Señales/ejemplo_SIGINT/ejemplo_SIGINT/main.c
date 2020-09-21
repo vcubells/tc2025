@@ -11,12 +11,21 @@
 
 void manejador(int ids)
 {
-    printf("--- Oprimiste Ctrl+C ...\n");
+    if (ids == 2) {
+        printf("--- Recibí la señal %d Ctrl + C ...\n", ids);
+    }
+    else {
+        printf("--- Recibí la señal %d ...\n", ids);
+    }
 }
 
 int main(int argc, const char * argv[]) {
     
-    if (signal(SIGKILL, manejador) == SIG_ERR) {
+    if (signal(SIGINT, manejador) == SIG_ERR) {
+        printf("ERROR: No se pudo establecer el manejador de la señal\n");
+    }
+    
+    if (signal(SIGTSTP, manejador) == SIG_ERR) {
         printf("ERROR: No se pudo establecer el manejador de la señal\n");
     }
     

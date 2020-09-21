@@ -23,6 +23,7 @@ int main(int argc, const char * argv[])
         exit(-1);
     }
     
+    /* Paso 1: Establecer un gestor */
     switch ( toupper(argv[1][0]) ) {
         case 'I' : gestor.sa_handler = SIG_IGN ; break;
         case 'D' : gestor.sa_handler = SIG_DFL ; break;
@@ -34,21 +35,21 @@ int main(int argc, const char * argv[])
     
     gestor.sa_flags = SA_RESTART;
     
-    if (sigaction(SIGINT, &gestor, 0) == -1 )
+    if (sigaction(SIGTSTP, &gestor, 0) == -1 )
     {
         printf("Error en el gestor de señales.\n");
         exit(-1);
     }
     
-    /* Leer el gestor */
-    sigaction(SIGINT, 0, &gestor_viejo);
+    /* Paso 2: Obtener el gestor del Paso 1 */
+    sigaction(SIGTSTP, 0, &gestor_viejo);
     if (gestor_viejo.sa_handler == SIG_DFL) printf("Tenías el valor predetermminado\n");
     else if (gestor_viejo.sa_handler == SIG_IGN) printf("La señal SIGINT se está ignorando\n");
     
     while (1)
     {
         printf("Antes del pause()\n");
-        pause();
+        sleep(1);
         printf("Después del pause()\n");
     }
     
@@ -56,5 +57,5 @@ int main(int argc, const char * argv[])
 
 void gestor_ctrlc (int senial)
 {
-    printf("***** Ha pulsado CTRL + C (señal número %d) \n", senial);
+    printf("***** Ha pulsado CTRL + Z (señal número %d) \n", senial);
 }
