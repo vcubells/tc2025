@@ -35,7 +35,7 @@ int main(int argc, const char * argv[]) {
     
     while (k-- > 0) {
         printf(" +++ %d y contando\n", k);
-        sleep(5);
+        sleep(1);
     }
     
     return 0;

@@ -91,6 +91,15 @@
       location = "group:Tema_4_Sen&#x303;ales"
       name = "Tema_4_Sen&#x303;ales">
       <FileRef
+         location = "group:ejercicio_4/ejercicio_4.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:ejercicio_2/ejercicio_2.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:ejercicio_1/ejercicio_1.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:ejemplo_SIGINT/ejemplo_SIGINT.xcodeproj">
       </FileRef>
       <FileRef

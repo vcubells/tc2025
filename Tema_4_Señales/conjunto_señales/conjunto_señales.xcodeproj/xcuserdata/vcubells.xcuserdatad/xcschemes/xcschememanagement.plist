@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>24</integer>
 		</dict>
+		<key>conjunto_señales.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>46</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>

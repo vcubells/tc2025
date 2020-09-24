@@ -13,9 +13,9 @@
 
 void gestor(int senial)
 {
-    printf("***** Mi papá me mandó un SIGUSR1 y lo voy a matarrrrrrrrrr\n", senial);
+    printf("***** Mi papá me mandó un SIGUSR1 \n", senial);
     kill(getppid(), SIGKILL);
-    printf("y ahora por remordimiento me voy a suicidar ....\n");
+    printf("y yo le envié un SIGKILL ....\n");
     raise(SIGKILL);
 }
 
