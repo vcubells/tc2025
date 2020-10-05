@@ -9,6 +9,11 @@
 #include <stdio.h>
 #include <signal.h>
 
+void gestor(int sid)
+{
+    printf("Procesando el Ctrl+C\n");
+}
+
 int main(int argc, const char * argv[])
 {
     sigset_t conjunto, pendientes;
@@ -18,21 +23,28 @@ int main(int argc, const char * argv[])
     
     sigaddset(&conjunto, SIGINT);
     
+    sigaddset(&conjunto, SIGTSTP);
+    
     sigprocmask(SIG_BLOCK, &conjunto, NULL);
+    
+    signal(SIGINT, gestor);
     
     for( i= 0; i < 10; ++i)
     {
-        printf("La señal SIGINT está bloqueada ... \n");
+        printf("Las señales SIGINT y SIGTSTP están bloqueadas ... \n");
         sleep(1);
         sigpending(&pendientes);
         
         if (sigismember(&pendientes, SIGINT))
             printf("He recibido un Ctrl+C y no lo procesé por estar bloqueada. \n");
+        if (sigismember(&pendientes, SIGTSTP))
+            printf("He recibido un Ctrl+Z y no lo procesé por estar bloqueada. \n");
         
     }
     
     sigprocmask(SIG_UNBLOCK, &conjunto, NULL);
-    printf("Ya se desbloqueó la señal");
+    
+    printf("Se desbloquearon las señales y se procesaron");
     
     while(1);
     

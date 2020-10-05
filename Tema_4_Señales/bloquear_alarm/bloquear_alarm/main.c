@@ -22,15 +22,15 @@ int main(int argc, const char * argv[])
     
     sigaddset(&conjunto, SIGALRM);
     
-    sigprocmask(SIG_BLOCK, &conjunto, NULL);
+    //sigprocmask(SIG_BLOCK, &conjunto, NULL);
     
     signal(SIGALRM, gestor);
     
     alarm(10);
     
-    sleep(20);
+    //sleep(12);
     
-    sigprocmask(SIG_UNBLOCK, &conjunto, NULL);
+    //sigprocmask(SIG_UNBLOCK, &conjunto, NULL);
     
     while(1);
     

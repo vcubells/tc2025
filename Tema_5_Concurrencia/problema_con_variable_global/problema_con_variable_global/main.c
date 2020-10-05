@@ -10,50 +10,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <unistd.h>
 
 #define OPERACIONES 100
-#define NHILOS 2
+#define NHILOS 5
 
+/* Variable compartida */
 int suma = 0;
 
 void * sumar(void * arg)
 {
-    int tid = (int) arg;
-    int i;
-    
     int temp;
     
-    for (i = 0; i < OPERACIONES; ++i) {
-
-        temp = suma;
-        /* Podría haber un cambio de contexto */
-        suma = suma + 1;
-    }
-    
-    pthread_exit(0);
-}
-
-void * restar(void * arg)
-{
-    int tid = (int) arg;
-    int i;
-
-    int temp;
-    
-    for (i = 0; i < OPERACIONES; ++i) {
+    for (int i = 0; i < OPERACIONES; ++i) {
         
+        /* Región crítica */
         temp = suma;
         /* Podría haber un cambio de contexto */
-        suma = suma - 1;
+        usleep(rand() % 2 );
+        suma = temp + 1;
+        /* Termina la región crítica */
     }
-
     
     pthread_exit(0);
 }
 
 int main(int argc, const char * argv[])
 {
-    
     pthread_t * tid;
     int nhilos;
     int i;
@@ -64,8 +47,11 @@ int main(int argc, const char * argv[])
     
     printf("Creando hilos ...\n");
     
-    pthread_create(tid, NULL, sumar, (void *)0);
-    pthread_create(tid+1, NULL, restar, (void *)1);
+    for (i = 0; i < nhilos; ++i) {
+        pthread_create(tid, NULL, sumar, NULL);
+        printf("Se creó el hilo %d con TID = %d...\n", i, *(tid+i));
+    }
+
     
     printf("Se crearon %d hilos ...\n", nhilos);
     
@@ -76,7 +62,7 @@ int main(int argc, const char * argv[])
     
     printf("Soy el proceso principal y ya terminaron todos los hilos...\n");
     
-    printf("Suma = %d y debía ser %d \n", suma, 0 );
+    printf("Suma total = %d y debía ser %d \n", suma, nhilos * OPERACIONES );
     
     free(tid);
     
