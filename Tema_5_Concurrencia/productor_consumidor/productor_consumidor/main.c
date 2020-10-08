@@ -2,9 +2,16 @@
 //  main.c
 //  productor_consumidor
 //
-//  Created by Vicente Cubells Nonell on 22/10/15.
-//  Copyright © 2015 Vicente Cubells Nonell. All rights reserved.
+//  Created by Vicente Cubells Nonell on 08/10/20.
+//  Copyright © 2020 Vicente Cubells Nonell. All rights reserved.
 //
+
+/*
+  Solución al problema del ptoductor-consumidor utilizando variables de condición
+  - Buena solución porque no tiene espera activa
+  - Además, brinda sincronización (a quien le corresponde el turno)
+  - Funciones pthread_cond_wait() y pthread_cond_signal()
+*/
 
 #include <stdio.h>
 #include <pthread.h>
@@ -117,7 +124,7 @@ void * consumidor(void * arg)
             out += i % BSIZE;
             --total;
             
-            if (total == BSIZE -1) {
+            if (total == BSIZE - 1) {
                 pthread_cond_signal(&produce_t);
             }
             

@@ -2,13 +2,20 @@
 //  main.c
 //  solucion_problema_variable_global
 //
-//  Created by Vicente Cubells Nonell on 19/10/15.
-//  Copyright © 2015 Vicente Cubells Nonell. All rights reserved.
+//  Created by Vicente Cubells Nonell on 08/10/20.
+//  Copyright © 2020 Vicente Cubells Nonell. All rights reserved.
 //
+
+/*
+  Solución al problema de la región crítica utilizando bloqueos con mutexes
+   - Funciones pthread_mutex_lock() y pthread_mutex_unlock()
+   - Inicialización estática de los mutexes con la macro PTHREAD_MUTEX_INITIALIZER
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <unistd.h>
 
 #define OPERACIONES 100
 #define NHILOS 2
@@ -32,9 +39,15 @@ void * sumar(void * arg)
         
         temp = suma;
         /* Podría haber un cambio de contexto */
-        suma = suma + 1;
+        usleep(rand() % 300);
         
-        resta = resta + 1;
+        suma = temp + 1;
+        
+        temp = resta;
+        
+        usleep(rand() % 300);
+        
+        resta = temp + 1 ;
         
         /* Termina región crítica */
         pthread_mutex_unlock(&mutex); // UP
@@ -56,11 +69,16 @@ void * restar(void * arg)
         pthread_mutex_lock(&mutex);
         
         temp = suma;
+        
         /* Podría haber un cambio de contexto */
+        usleep(rand() % 300);
+        suma = temp - 1;
         
-        suma = suma - 1;
+        temp = resta;
         
-        resta = resta - 1 ;
+        usleep(rand() % 300);
+        
+        resta = temp - 1 ;
         
         /* Termina región crítica */
         pthread_mutex_unlock(&mutex);
@@ -72,10 +90,11 @@ void * restar(void * arg)
 
 int main(int argc, const char * argv[])
 {
-    
     pthread_t * tid;
     int nhilos;
     int i;
+    
+    srand((unsigned int) time(NULL));
     
     nhilos = NHILOS;
     
@@ -90,7 +109,7 @@ int main(int argc, const char * argv[])
     
     for (i = 0; i < nhilos; ++i) {
         pthread_join(*(tid+i), NULL);
-        printf("Se unió el hilo %d con TID = %d...\n", i, *(tid+i));
+        printf("Se unió el hilo %d con TID = %d...\n", i, (int) *(tid+i));
     }
     
     printf("Soy el proceso principal y ya terminaron todos los hilos...\n");

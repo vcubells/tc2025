@@ -2,13 +2,19 @@
 //  main.c
 //  problema_inversion_mutexes
 //
-//  Created by Vicente Cubells Nonell on 19/10/15.
-//  Copyright © 2015 Vicente Cubells Nonell. All rights reserved.
+//  Created by Vicente Cubells Nonell on 08/10/20.
+//  Copyright © 2020 Vicente Cubells Nonell. All rights reserved.
 //
+
+/*
+  Demostrar el problema de bloqueos cuando se invierten los mutexes
+  para proteger dos variables globales
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <unistd.h>
 
 #define OPERACIONES 100
 #define NHILOS 2
@@ -33,10 +39,17 @@ void * sumar(void * arg)
         
         temp = suma;
         /* Podría haber un cambio de contexto */
-        suma = suma + 1;
+        usleep(rand() % 300);
+        
+        suma = temp + 1;
         
         pthread_mutex_lock(&mutex_r);
-        resta = resta + 1;
+        temp = resta;
+        
+        /* Podría haber un cambio de contexto */
+        usleep(rand() % 300);
+        
+        resta = temp + 1;
         pthread_mutex_unlock(&mutex_r);
         
         /* Termina región crítica */
@@ -56,21 +69,27 @@ void * restar(void * arg)
     for (i = 0; i < OPERACIONES; ++i) {
         
         /* Inicia Región crítica */
-        pthread_mutex_lock(&mutex_s);
+        pthread_mutex_lock(&mutex_r);
         
         temp = suma;
         /* Podría haber un cambio de contexto */
+        usleep(rand() % 300);
         
-        suma = suma - 1;
+        suma = temp - 1;
         
-        pthread_mutex_lock(&mutex_r);
         
-        resta = resta - 1 ;
+        pthread_mutex_lock(&mutex_s);
         
-        pthread_mutex_unlock(&mutex_r);
+        temp = resta;
+        
+        usleep(rand() % 300);
+        
+        resta = temp - 1 ;
+        
+        pthread_mutex_unlock(&mutex_s);
         
         /* Termina región crítica */
-        pthread_mutex_unlock(&mutex_s);
+        pthread_mutex_unlock(&mutex_r);
     }
     
     

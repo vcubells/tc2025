@@ -2,9 +2,17 @@
 //  main.c
 //  multiples_productores_consumidores
 //
-//  Created by Vicente Cubells Nonell on 22/10/15.
-//  Copyright © 2015 Vicente Cubells Nonell. All rights reserved.
+//  Created by Vicente Cubells Nonell on 08/10/20.
+//  Copyright © 2020 Vicente Cubells Nonell. All rights reserved.
 //
+
+/*
+  Solución al problema del productor-consumidor utilizando variables de condición
+  - Buena solución porque no tiene espera activa
+  - Además, brinda sincronización (a quien le corresponde el turno)
+  - Funciones pthread_cond_wait() y pthread_cond_broadcast()
+  - NP productores y NC consumidores
+*/
 
 #include <stdio.h>
 #include <pthread.h>
@@ -16,7 +24,7 @@
 #define N 100
 
 #define PRODUCTORES 10
-#define CONSUMIDORES 10
+#define CONSUMIDORES 5
 
 int elementos[BSIZE];
 
@@ -48,7 +56,7 @@ int main(int argc, const char * argv[]) {
     
     /* Crear los productores */
     for (aux = obreros; aux < (obreros+PRODUCTORES); ++aux) {
-        printf("--- Creando el productor %d ---\n", ++indice);
+        printf("(I) Creando el productor %d\n", ++indice);
         pthread_create(aux, NULL, productor, (void *) indice);
     }
     
@@ -56,7 +64,7 @@ int main(int argc, const char * argv[]) {
     indice = 0;
     
     for (; aux < (obreros+nhilos); ++aux) {
-        printf("--- Creando el consumidor %d ---\n", ++indice);
+        printf("(I) Creando el consumidor %d\n", ++indice);
         pthread_create(aux, NULL, consumidor, (void *) indice);
     }
     
@@ -75,6 +83,8 @@ void * productor(void * arg)
 {
     int id = (int) arg;
     
+    printf("(P) Inicia productor %d\n", id);
+    
     while (producidos < N) {
         
         /* Asumir que trabajan a diferentes velocidades */
@@ -89,7 +99,7 @@ void * productor(void * arg)
             
             elementos[in] = producidos;
             
-            printf(" +++ (Productor %d) Se produjo el elemento %d\n", id, elementos[in]);
+            printf("+++ (Productor %d) Se produjo el elemento %d\n", id, elementos[in]);
             
             ++producidos;
             
@@ -104,9 +114,9 @@ void * productor(void * arg)
         else {
             /* El buffer está lleno, se va a dormir */
             
-            printf("zzzzz (Productor %d) se va a dormir \n", id);
+            printf("-------------- Productor %d se durmió ------------\n", id);
             pthread_cond_wait(&produce_t, &mutex);
-            printf("uuuuu (Productor %d) se despertó \n", id);
+            printf("-------------- Productor %d se despertó ------------\n", id);
         }
         
         pthread_mutex_unlock(&mutex);
@@ -120,6 +130,8 @@ void * consumidor(void * arg)
 {
     int id = (int) arg;
     
+    printf("(C) Inicia consumidor %d\n", id);
+    
     while (consumidos < N) {
         
         /* Asumir que trabajan a diferentes velocidades */
@@ -132,7 +144,7 @@ void * consumidor(void * arg)
         {
             /* Consume un elemento */
             
-            printf(" --- (Consumidor %d) Se consumió el elemento %d\n", id, elementos[out]);
+            printf("--- (Consumidor %d) Se consumió el elemento %d\n", id, elementos[out]);
             
             ++consumidos;
             
@@ -140,16 +152,16 @@ void * consumidor(void * arg)
             out %= BSIZE;
             --total;
             
-            if (total == BSIZE -1) {
+            if (total == (BSIZE - 1) ) {
                 pthread_cond_broadcast(&produce_t);
             }
             
         }
         else {
             /* El buffer está vacío, se va a dormir */
-            printf("ZZZZZ (Consumidor %d) se va a dormir \n", id);
+            printf("-------------- Consumidor %d se durmió ------------\n", id);
             pthread_cond_wait(&consume_t, &mutex);
-            printf("UUUUU (Consumidor %d) se despertó \n", id);
+            printf("-------------- Consumidor %d se despertó ------------\n", id);
         }
         
         pthread_mutex_unlock(&mutex);

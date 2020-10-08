@@ -2,9 +2,15 @@
 //  main.c
 //  problema_con_variable_global
 //
-//  Created by Vicente Cubells Nonell on 19/10/15.
-//  Copyright © 2015 Vicente Cubells Nonell. All rights reserved.
+//  Created by Vicente Cubells Nonell on 06/10/20.
+//  Copyright © 2020 Vicente Cubells Nonell. All rights reserved.
 //
+
+/*
+  Demostrar el problema que surge al no proteger la región crítica (variable global suma)
+  cuando los procesos se ejecutan en un orden arbitrario.
+   - Solución no determinista
+*/
 
 
 #include <stdio.h>
@@ -27,7 +33,7 @@ void * sumar(void * arg)
         /* Región crítica */
         temp = suma;
         /* Podría haber un cambio de contexto */
-        usleep(rand() % 2 );
+        usleep(rand() % 200 );
         suma = temp + 1;
         /* Termina la región crítica */
     }
@@ -41,6 +47,8 @@ int main(int argc, const char * argv[])
     int nhilos;
     int i;
     
+    srand((unsigned int) time(NULL));
+    
     nhilos = NHILOS;
     
     tid = malloc(nhilos * sizeof(pthread_t));
@@ -48,16 +56,15 @@ int main(int argc, const char * argv[])
     printf("Creando hilos ...\n");
     
     for (i = 0; i < nhilos; ++i) {
-        pthread_create(tid, NULL, sumar, NULL);
-        printf("Se creó el hilo %d con TID = %d...\n", i, *(tid+i));
+        pthread_create(tid+i, NULL, sumar, NULL);
+        printf("Se creó el hilo %d con TID = %d\n", i, (int) *(tid+i));
     }
-
     
     printf("Se crearon %d hilos ...\n", nhilos);
     
     for (i = 0; i < nhilos; ++i) {
         pthread_join(*(tid+i), NULL);
-        printf("Se unió el hilo %d con TID = %d...\n", i, *(tid+i));
+        printf("Se unió el hilo %d con TID = %d\n", i, (int) *(tid+i));
     }
     
     printf("Soy el proceso principal y ya terminaron todos los hilos...\n");
