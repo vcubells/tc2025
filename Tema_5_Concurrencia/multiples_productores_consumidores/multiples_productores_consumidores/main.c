@@ -111,7 +111,7 @@ void * productor(void * arg)
                 pthread_cond_broadcast(&consume_t);
             }
         }
-        else {
+        else if (producidos < N) {
             /* El buffer está lleno, se va a dormir */
             
             printf("-------------- Productor %d se durmió ------------\n", id);
@@ -157,7 +157,7 @@ void * consumidor(void * arg)
             }
             
         }
-        else {
+        else if (consumidos < N){
             /* El buffer está vacío, se va a dormir */
             printf("-------------- Consumidor %d se durmió ------------\n", id);
             pthread_cond_wait(&consume_t, &mutex);

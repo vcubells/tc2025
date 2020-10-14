@@ -7,7 +7,7 @@
 //
 
 /*
-  Solución al problema del ptoductor-consumidor utilizando variables de condición
+  Solución al problema del productor-consumidor utilizando variables de condición
   - Buena solución porque no tiene espera activa
   - Además, brinda sincronización (a quien le corresponde el turno)
   - Funciones pthread_cond_wait() y pthread_cond_signal()
@@ -40,14 +40,23 @@ int main(int argc, const char * argv[]) {
     
     pthread_t produce, consume;
     
-    srand(time(NULL));
+    int result;
+    
+    srand((unsigned int) time(NULL));
     
     /* Crear el hilo productor */
-    produce = pthread_create(&produce, NULL, productor, NULL);
+    result = pthread_create(&produce, NULL, productor, NULL);
+    
+    if (result) {
+        printf("Error al crear el Productor\n");
+    }
     
     /* Crear el hilo consumidor */
-    produce = pthread_create(&consume, NULL, consumidor, NULL);
+    result = pthread_create(&consume, NULL, consumidor, NULL);
     
+    if (result) {
+        printf("Error al crear el Consumidor\n");
+    }
 
     /* Esperar a que los hilos terminen */
     pthread_join(produce, NULL);
@@ -79,7 +88,8 @@ void * productor(void * arg)
             
             ++i;
             
-            in += i % BSIZE;
+            ++in;
+            in %= BSIZE;
             ++total;
             
             if (total == 1) {
@@ -120,8 +130,8 @@ void * consumidor(void * arg)
             printf(" --- Se consumió el elemento %d\n", elementos[out]);
             
             ++i;
-            
-            out += i % BSIZE;
+            ++out;
+            out %= BSIZE;
             --total;
             
             if (total == BSIZE - 1) {
