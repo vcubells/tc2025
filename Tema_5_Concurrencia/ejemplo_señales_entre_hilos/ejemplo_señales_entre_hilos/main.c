@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <signal.h>
+#include <unistd.h>
 
 void * Hilo1 (void * id)
 {

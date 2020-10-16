@@ -82,7 +82,7 @@ int main(int argc, const char * argv[]) {
 void * productor(void * arg)
 {
     int id = (int) arg;
-    
+        
     printf("(P) Inicia productor %d\n", id);
     
     while (producidos < N) {
@@ -93,7 +93,7 @@ void * productor(void * arg)
         
         pthread_mutex_lock(&mutex);
         
-        if (total < BSIZE) {
+        if (total < BSIZE && producidos < N) {
             
             /* Produce un elemento */
             
@@ -102,7 +102,7 @@ void * productor(void * arg)
             printf("+++ (Productor %d) Se produjo el elemento %d\n", id, elementos[in]);
             
             ++producidos;
-            
+                        
             ++in;
             in %= BSIZE;
             ++total;
@@ -129,7 +129,7 @@ void * productor(void * arg)
 void * consumidor(void * arg)
 {
     int id = (int) arg;
-    
+        
     printf("(C) Inicia consumidor %d\n", id);
     
     while (consumidos < N) {
@@ -140,7 +140,7 @@ void * consumidor(void * arg)
         
         pthread_mutex_lock(&mutex);
         
-        if (total > 0)
+        if (total > 0 && consumidos < N)
         {
             /* Consume un elemento */
             
