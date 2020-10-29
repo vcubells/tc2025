@@ -134,6 +134,9 @@
       location = "group:Tema_5_Concurrencia"
       name = "Tema_5_Concurrencia">
       <FileRef
+         location = "group:problema_blancanieves_y_enanitos/problema_blancanieves_y_enanitos.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:problema_ban&#x303;o_mujeres_hombres/problema_ban&#x303;o_mujeres_hombres.xcodeproj">
       </FileRef>
       <FileRef
@@ -179,6 +182,9 @@
    <Group
       location = "group:Tema_6_Paralelismo"
       name = "Tema_6_Paralelismo">
+      <FileRef
+         location = "group:pthread_simd/pthread_simd.xcodeproj">
+      </FileRef>
       <FileRef
          location = "group:omp_parallel/omp_parallel.xcodeproj">
       </FileRef>

@@ -12,29 +12,27 @@
 #define N 1000000
 
 int main(int argc, const char * argv[]) {
-    
-    int tid;
     int i;
     int suma = 0;
     double inicio, fin;
     
     inicio = omp_get_wtime();
-#pragma omp parallel private(i, tid) reduction(+:suma)
+    
+    #pragma omp parallel private(i)
     {
-       // tid = omp_get_thread_num();
+        int tid = omp_get_thread_num();
         
-#pragma omp for schedule(guided,1000)
+        #pragma omp for schedule(guided,1000) private(i) reduction(+:suma)
         for (i = 0; i < N; ++i) {
-            suma += i;
+            suma += 1;
         }
         
-      //  printf("Soy el hilo %d y mi Suma = %d \n", tid, suma);
+        printf("Soy el hilo %d y mi Suma = %d \n", tid, suma);
     }
     
     fin = omp_get_wtime();
     
-   printf("Tiempo  = %f \n", fin-inicio);
-    
+    printf("Tiempo  = %f \n", fin-inicio);
     
     return 0;
 }
