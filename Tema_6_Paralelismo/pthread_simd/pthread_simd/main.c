@@ -10,6 +10,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/time.h>
 
 int NHILOS = 4;
 int N = 1000;
@@ -19,6 +20,11 @@ int * vector;
 
 /* Vector de sumas parciales */
 int * sumas;
+
+/* Variable acumuladora global */
+int suma_global = 0;
+
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 int suma()
 {
@@ -66,6 +72,35 @@ void * suma_paralela(void * tid)
 }
 
 
+void * suma_paralela_con_bloqueo(void * tid)
+{
+    int id = (int *) tid;
+    
+    int total = 0;
+    
+    int elementos = N / NHILOS;
+    
+    int * inicio = vector + (id * elementos);
+    int * fin;
+    
+    if (id == NHILOS-1) {
+        fin = vector + N;
+    }
+    else {
+        fin = inicio + elementos;
+    }
+    
+    for (int * aux = inicio; aux < fin; ++aux) {
+        total += *aux;
+    }
+    
+    pthread_mutex_lock(&mutex);
+    suma_global += total;
+    pthread_mutex_unlock(&mutex);
+    
+    pthread_exit(NULL);
+}
+
 int main(int argc, const char * argv[]) {
     
     /* Leer argumentos */
@@ -88,7 +123,12 @@ int main(int argc, const char * argv[]) {
     
     /* Crear los hilos de ejecución */
     
+    /* Variables para medir el tiempo con precisión */
+    struct timeval tval_before, tval_after, tval_result;
+    
     // Tiempo inicio región paralela
+    gettimeofday(&tval_before, NULL);
+
     pthread_t * hilos = (pthread_t * ) malloc(sizeof(pthread_t) * NHILOS);
     
     for (int i = 0; i < NHILOS; ++i) {
@@ -109,18 +149,27 @@ int main(int argc, const char * argv[]) {
     }
     
     // Tiempo final región paralela
+    gettimeofday(&tval_after, NULL);
     
-    /* Obtener la suma */
-    printf("La suma total paralela es = %d\n", total );
-    
-    /* Obtener la suma */
-    
-    time_t t_inicio = time(NULL);
-    total = suma();
-    time_t t_final = time(NULL);
-    
-    printf("La suma total secuencial es = %d y demoró %d segundos\n", suma(), t_final-t_inicio );
+    timersub(&tval_after, &tval_before, &tval_result);
 
+    
+    /* Obtener la suma */
+    printf("La suma total paralela es = %d y demoró %ld.%06ld microsegundos\n", total, (long int)tval_result.tv_sec, (long int)tval_result.tv_usec );
+    
+    /* Obtener la suma */
+    
+    gettimeofday(&tval_before, NULL);
+    
+    total = suma();
+    
+    gettimeofday(&tval_after, NULL);
+    
+    timersub(&tval_after, &tval_before, &tval_result);
+
+    
+    printf("La suma total secuencial es = %d y demoró %ld.%06ld microsegundos\n", total, (long int)tval_result.tv_sec, (long int)tval_result.tv_usec );
+    
     /* Liberar la memoria */
     free(vector);
     free(sumas);

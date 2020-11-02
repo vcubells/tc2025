@@ -183,6 +183,21 @@
       location = "group:Tema_6_Paralelismo"
       name = "Tema_6_Paralelismo">
       <FileRef
+         location = "group:omp_suma_vector_con_particionamiento/omp_suma_vector_con_particionamiento.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:omp_saxpi/omp_saxpi.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:omp_pi/omp_pi.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:omp_factorial/omp_factorial.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:omp_parallel_basico/omp_parallel_basico.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:pthread_simd/pthread_simd.xcodeproj">
       </FileRef>
       <FileRef
