@@ -14,7 +14,7 @@ void inicializa(double * vector, long int n)
 {
     double * fin = vector + n;
     for (double * aux = vector; aux < fin; ++aux) {
-        *aux = (double) rand() / RAND_MAX;
+        *aux = 1.; //(double) rand() / RAND_MAX;
     }
 }
 
@@ -25,40 +25,12 @@ double suma(double * vector, long int n, int nhilos)
     
     #pragma omp parallel private(i) shared(vector, n, suma)  num_threads(nhilos) if (n > 1000)
     {
-        /* Obtener el thread id */
-        //tid = omp_get_thread_num();
-        
-        //nthreads = omp_get_num_threads();
-        
-        
-//        /* Particionar los datos */
-//        int elementos = N / nthreads;
-//
-//        int inicio = tid * elementos;
-//        int fin;
-//
-//        if (tid == nthreads-1) {
-//            fin = N;
-//        }
-//        else {
-//            fin = inicio + elementos;
-//        }
         
         /* Paralelizar la suma */
         #pragma omp for reduction(+:suma)
         for (i = 0; i < n; ++i) {
             suma += *(vector + i);
         }
-        
-//        printf("Soy el hilo = %d y mi suma es = %d\n", tid, suma_global);
-        
-        /* Solo el master lo ejecuta */
-        //if (tid == 0)
-//        #pragma omp master
-//        {
-//            printf("%d hilos obtuvieron la suma = %d\n", nthreads, suma_global);
-//        }
-    
 
     } /* Join automático */
     
@@ -109,8 +81,11 @@ int main(int argc, const char * argv[]) {
     /* Inicializar el vector */
     inicializa(vector, N);
     
-    //omp_set_schedule(omp_sched_static, 100);
+    omp_set_schedule(omp_sched_static, 1000);
     
+    
+    
+    printf("Procs = %d, Threads = %d\n", omp_get_num_procs(), omp_get_num_threads() );
     double t_inicio = omp_get_wtime();
     
     suma_global = suma(vector, N, NHILOS);
