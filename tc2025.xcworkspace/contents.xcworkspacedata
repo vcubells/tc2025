@@ -183,6 +183,9 @@
       location = "group:Tema_6_Paralelismo"
       name = "Tema_6_Paralelismo">
       <FileRef
+         location = "group:omp_sections/omp_sections.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:omp_suma_vector_con_particionamiento/omp_suma_vector_con_particionamiento.xcodeproj">
       </FileRef>
       <FileRef

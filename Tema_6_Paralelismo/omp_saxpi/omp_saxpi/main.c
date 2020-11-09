@@ -33,7 +33,7 @@ int main ()
             y[i] = (rand() % 10) * 1.0;
         }
 
-        /* SAXPY */
+        /* SAXPY S = a * X + Y */
         #pragma omp for simd simdlen(4)
         for (int i = 0; i < n; i++)
         {
