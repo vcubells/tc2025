@@ -24,7 +24,6 @@ typedef union {
 
 int main(int argc, const char * argv[])
 {
-    
     persona e;
     
     persona_u u;
@@ -36,6 +35,7 @@ int main(int argc, const char * argv[])
     printf(" Valores en la estructura:\n\n");
     
     printf("%s %s (%d)\n\n", e.nombre, e.apellidos, e.edad);
+    printf("%p %p (%p)\n\n",e.nombre, e.apellidos, &e.edad);
     
     
     strcpy(u.nombre, "Juan");           // u.nombre = "Juan"
@@ -45,7 +45,8 @@ int main(int argc, const char * argv[])
 
     printf(" Valores en la unión:\n\n");
     
-    printf("%s %s (%d)\n\n", u.nombre, u.apellidos, u.edad);
+    printf("%d %d (%d)\n\n", *u.nombre, *u.apellidos, u.edad);
+    printf("%p %p (%p)\n\n", u.nombre, u.apellidos, &u.edad);
     
     
     return 0;
