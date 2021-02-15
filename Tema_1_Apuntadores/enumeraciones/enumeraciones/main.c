@@ -18,16 +18,26 @@ enum DiasSemana {
     Sabado
 };
 
+enum errors {
+    OK = 200,
+    BadGateway = 301,
+    PageNotFound = 404
+};
+
 int main(int argc, const char * argv[]) {
     
     enum DiasSemana dia;
     
     char * nombres[7] = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
     
-    for (dia = Domingo; dia <= Sabado; ++dia)
+    for (dia = Domingo; dia <= Sabado; dia++)
     {
         printf("%d - %s \n", dia, nombres[dia]);
+        //printf("%d  \n", dia);
     }
+    
     return 0;
 }
+
+
 

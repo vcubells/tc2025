@@ -68,6 +68,21 @@ int main(int argc, const char * argv[]) {
     
     /* Imprimir los números */
     
+    /* Tradicional solo índices */
+    printf("-- Tradicional ---\n");
+    for (int i = 0; i < n; ++i) {
+        printf("%d\t", numeros[i]);
+    }
+    printf("\n");
+    
+    /* Combinación de índices y AA */
+    printf("-- Combinada ---\n");
+    for (int i = 0; i < n; ++i) {
+        printf("%d\t", *(numeros+i));
+    }
+    printf("\n");
+    
+    
     imprime(numeros, fin);
     
     /* Reservando mas memoria */
@@ -106,6 +121,8 @@ void imprime(int * inicio, int * fin)
 {
     int * aux;
     
+    /* Aritmética de apuntadores */
+    printf("-- Aritmética de apuntadores ---\n");
     for (aux = inicio; aux < fin; ++aux) {
         printf("%d\t", *aux);
     }
