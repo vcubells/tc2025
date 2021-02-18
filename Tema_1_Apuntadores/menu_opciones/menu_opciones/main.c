@@ -8,34 +8,57 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "funciones.h"
+#include "funciones.h"
 
-#define N 4
+#define N 6
 
 typedef void (*opcion_t) (int);
 
-void abrir(int);
-void guardar(int);
-void salir(int);
-void copiar(int);
+void menu_f(opcion_t * opciones);
 
 int main(int argc, const char * argv[]) {
     
+    /* Declaración del arreglo y reservación de memoria */
     opcion_t * menu = (opcion_t *) malloc( N * sizeof(opcion_t));
-    
+
+    /* Asignaciones de opciones al arreglo */
     *menu = abrir;
     *(menu+1) = guardar;
     *(menu+2) = salir;
     *(menu+3) = copiar;
+    *(menu+4) = cortar;
+    *(menu+5) = pegar;
     
+    /* Invocación al menú de opciones */
+    menu_f(menu);
     
-    printf("--- Opciones --- \n1-Abrir\n2-Guardar\n3-Salir\n4-Copiar\nEscoge tu opción: ");
+    /* Liberar memoria */
+    free(menu);
     
+    return 0;
+}
+
+
+void menu_f(opcion_t * opciones)
+{
     int opcion;
     
-    scanf("%d", &opcion);
-    
-    /* Utilizando switch */
-    
+    do {
+        printf("--- Opciones --- \n1-Abrir\n2-Guardar\n3-Salir\n4-Copiar\n5-Cortar\n6-Pegar\n0-Terminar\nEscoge tu opción: ");
+
+        scanf("%d", &opcion);
+        
+        if(opcion > 0 && opcion < 7 ) {
+            (*(opciones+opcion-1))(opcion);
+        }
+    }
+    while (opcion > 0 && opcion < 7);
+}
+
+
+/* Utilizando switch */
+
 //    switch (opcion) {
 //        case 1:
 //            abrir(opcion);
@@ -57,34 +80,8 @@ int main(int argc, const char * argv[]) {
 //            printf("Opción no válida\n");
 //            break;
 //    }
-    
-    /* Apuntadores a funciones */
-    /* nombre(opcion) */
-    (*(menu+opcion-1))(opcion);
-    // menu[opcion-1](opcion);
-    
-    free(menu);
-    
-    return 0;
-}
 
-void abrir(int opcion)
-{
-    printf("%d - Abriendo el archivo...\n", opcion);
-}
+/* Apuntadores a funciones */
+/* nombre(opcion) */
 
-void guardar(int opcion)
-{
-    printf("%d - Guardando el archivo...\n", opcion);
-}
-
-void salir(int opcion)
-{
-    printf("%d - Terminando el programa...\n", opcion);
-}
-
-void copiar(int opcion)
-{
-    printf("%d - Copiando el archivo...\n", opcion);
-}
-
+// menu[opcion-1](opcion);

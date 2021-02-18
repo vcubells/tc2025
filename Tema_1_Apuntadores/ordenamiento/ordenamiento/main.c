@@ -29,7 +29,7 @@ int main(int argc, const char * argv[]) {
         printf("%4d", *p);
     }
     
-    ordena(valores, desc);
+    ordena(valores, asc);
     
     
     printf("\n\n--- Ordenados ---\n\n");
@@ -51,6 +51,7 @@ void ordena(int * numeros, int criterio(int, int))
     {
         for(j = N-1; j > i; --j)
         {
+            //if (numeros[j] < numeros[j-1])
             if (criterio(numeros[j],numeros[j-1])) {
                 temp = numeros[j-1];
                 numeros[j-1] = numeros[j];
