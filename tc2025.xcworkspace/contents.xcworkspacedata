@@ -5,6 +5,9 @@
       location = "group:Tema_1_Apuntadores"
       name = "Tema_1_Apuntadores">
       <FileRef
+         location = "group:ejemplo_strtok/ejemplo_strtok.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:apuntadores/apuntadores.xcodeproj">
       </FileRef>
       <FileRef

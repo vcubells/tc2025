@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <time.h>
+#include <unistd.h>
 
 #define N 100
 
@@ -62,6 +63,8 @@ int main(int argc, const char * argv[]) {
 
 void * suma(void * arg)
 {
+    sleep(rand() %10);
+    
     printf("H - Soy el hilo %d\n", arg);
 
     pthread_exit(NULL);

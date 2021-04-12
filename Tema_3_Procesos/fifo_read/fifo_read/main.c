@@ -20,9 +20,11 @@ int main(int argc, const char * argv[])
     
     fd = open("/Users/vcubells/fifo", O_RDONLY);
     
-    int i = -1;
+    int i = 0;
     
-    while (leidos = read(fd, &i, sizeof(int))) {
+    while (i != -1) {
+        leidos = read(fd, &i, sizeof(int));
+        
         printf("%d\n", i);
     }
     

@@ -77,7 +77,6 @@ void * restar(void * arg)
         
         suma = temp - 1;
         
-        
         pthread_mutex_lock(&mutex_s);
         
         temp = resta;

@@ -18,8 +18,10 @@
 #include <pthread.h>
 #include <unistd.h>
 
-#define OPERACIONES 100
+#define OPERACIONES 1000000
 #define NHILOS 5
+
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 /* Variable compartida */
 int suma = 0;
@@ -30,12 +32,14 @@ void * sumar(void * arg)
     
     for (int i = 0; i < OPERACIONES; ++i) {
         
+        pthread_mutex_lock(&mutex);
         /* Región crítica */
         temp = suma;
         /* Podría haber un cambio de contexto */
-        usleep(rand() % 200 );
+        usleep(rand() % 10 );
         suma = temp + 1;
         /* Termina la región crítica */
+        pthread_mutex_unlock(&mutex);
     }
     
     pthread_exit(0);

@@ -27,12 +27,15 @@ int main(int argc, const char * argv[])
     
     int i = 0;
     
-    while (i++ < 10) {
+    while (i != -1) {
+        printf("Entra un número: ");
+        scanf("%d", &i);
+        
         write(fd, &i, sizeof(int));
     }
     
     close(fd);
-    unlink("/Users/vcubells/fifo");
+    //unlink("/Users/vcubells/fifo");
     
     return 0;
 }

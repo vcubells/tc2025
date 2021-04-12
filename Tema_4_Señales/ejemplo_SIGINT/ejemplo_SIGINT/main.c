@@ -8,10 +8,11 @@
 
 #include <stdio.h>
 #include <signal.h>
+#include <unistd.h>
 
 void manejador(int ids)
 {
-    if (ids == 2) {
+    if (ids == SIGINT) {
         printf("--- Recibí la señal %d Ctrl + C ...\n", ids);
     }
     else {

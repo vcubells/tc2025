@@ -8,8 +8,10 @@
 
 #include <signal.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
 
-#define TIEMPO 5
+#define TIEMPO 10
 
 int bucle = 1;
 int numcortes = 0;
@@ -45,7 +47,7 @@ int main(int argc, const char * argv[])
     }
     
     gestion.sa_handler = gestor_alarma;
-    gestion.sa_flags = SA_ONESHOT;
+    gestion.sa_flags = SA_RESETHAND;
     
     err = sigaction (SIGALRM, &gestion, 0);
     
@@ -62,7 +64,7 @@ int main(int argc, const char * argv[])
     while (bucle);
     
     gestion.sa_handler = SIG_IGN;
-    gestion.sa_flags = SA_ONESHOT;
+    gestion.sa_flags = SA_RESETHAND;
     
     err = sigaction (SIGINT, &gestion, 0);
     

@@ -21,7 +21,7 @@ int main(int argc, const char * argv[])
     struct sigaction senal;
     
     senal.sa_handler = gestor;
-    senal.sa_flags = SA_ONESHOT;
+    senal.sa_flags = SA_RESETHAND;
     
     if ( sigaction(SIGINT, &senal, 0) == -1)
     {

@@ -8,6 +8,8 @@
 
 #include <signal.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 void gestor_ctrlc (int);
 void gestor_ctrlz (int);
@@ -18,9 +20,7 @@ int main(int argc, const char * argv[])
     
     void (*ret_signal_z)();
     void (*ret_signal_c)();
-    
-    system("clear");
-    
+        
     printf("******************************************************\n");
     printf("******** Terminará al pulsar 3 veces CTRL + Z *******\n");
     printf("******************************************************\n\n");

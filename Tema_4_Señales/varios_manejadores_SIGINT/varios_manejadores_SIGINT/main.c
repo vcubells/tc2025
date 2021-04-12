@@ -9,6 +9,9 @@
 
 #include <signal.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <ctype.h>
 
 void gestor_ctrlc (int);
 

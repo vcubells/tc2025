@@ -12,7 +12,7 @@
 #include <sys/wait.h>
 #include <time.h>
 
-#define N 10
+#define N 100000
 
 int suma(int *, int, int);
 void print(int *, int, int);

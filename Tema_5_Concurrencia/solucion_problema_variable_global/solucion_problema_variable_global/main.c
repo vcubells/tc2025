@@ -17,7 +17,7 @@
 #include <pthread.h>
 #include <unistd.h>
 
-#define OPERACIONES 100
+#define OPERACIONES 1000000
 #define NHILOS 2
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -39,13 +39,13 @@ void * sumar(void * arg)
         
         temp = suma;
         /* Podría haber un cambio de contexto */
-        usleep(rand() % 300);
+        usleep(rand() % 10);
         
         suma = temp + 1;
         
         temp = resta;
         
-        usleep(rand() % 300);
+        usleep(rand() % 10);
         
         resta = temp + 1 ;
         
@@ -71,12 +71,12 @@ void * restar(void * arg)
         temp = suma;
         
         /* Podría haber un cambio de contexto */
-        usleep(rand() % 300);
+        usleep(rand() % 10);
         suma = temp - 1;
         
         temp = resta;
         
-        usleep(rand() % 300);
+        usleep(rand() % 10);
         
         resta = temp - 1 ;
         
