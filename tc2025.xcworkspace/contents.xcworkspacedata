@@ -186,6 +186,9 @@
       location = "group:Tema_6_Paralelismo"
       name = "Tema_6_Paralelismo">
       <FileRef
+         location = "group:pthread_factorial/pthread_factorial.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:omp_sections/omp_sections.xcodeproj">
       </FileRef>
       <FileRef

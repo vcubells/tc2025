@@ -132,7 +132,7 @@ int main(int argc, const char * argv[]) {
     pthread_t * hilos = (pthread_t * ) malloc(sizeof(pthread_t) * NHILOS);
     
     for (int i = 0; i < NHILOS; ++i) {
-        pthread_create(hilos+i, NULL, suma_paralela, (int *) i);
+        pthread_create(hilos+i, NULL, suma_paralela_con_bloqueo, (int *) i);
     }
     
     /* Esperar a que terminen los hilos de ejecución */
@@ -142,11 +142,11 @@ int main(int argc, const char * argv[]) {
     
     /* Realizar la reducción */
     int total = 0;
-    
+    /*
     fin = sumas + NHILOS;
     for (int * aux = sumas; aux < fin; ++aux) {
         total += *aux;
-    }
+    } */
     
     // Tiempo final región paralela
     gettimeofday(&tval_after, NULL);
@@ -155,7 +155,7 @@ int main(int argc, const char * argv[]) {
 
     
     /* Obtener la suma */
-    printf("La suma total paralela es = %d y demoró %ld.%06ld microsegundos\n", total, (long int)tval_result.tv_sec, (long int)tval_result.tv_usec );
+    printf("La suma total paralela es = %d y demoró %ld.%06ld microsegundos\n", suma_global, (long int)tval_result.tv_sec, (long int)tval_result.tv_usec );
     
     /* Obtener la suma */
     

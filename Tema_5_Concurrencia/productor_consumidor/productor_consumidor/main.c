@@ -78,6 +78,8 @@ void * productor(void * arg)
         
         pthread_mutex_lock(&mutex);
         
+        //while (total < BSIZE);
+        
         if (total < BSIZE) {
             
             /* Produce un elemento */

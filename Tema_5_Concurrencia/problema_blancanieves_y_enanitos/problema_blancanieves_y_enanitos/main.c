@@ -33,14 +33,14 @@ int main(int argc, const char * argv[])
     sem_init(&turno, 0, 0);
     esperando = 0;
     
-    /*Crear Blancanieves */
+    /* Crear Blancanieves */
     result = pthread_create(&hilos[0], NULL, blancanieves, NULL);
     if (result)
         printf("Error al crear a Blancanieves \n");
     
     /* Crear enanitos */
     for (i = 1; i <= ENANOS; ++i )
-    result = pthread_create(&hilos[i], NULL, enanito, (void *)i);
+    result = pthread_create(&hilos[i], NULL, enanito, (void *)&i);
     if (result)
         printf("Error al crear el enano %d \n", i);
         
@@ -61,11 +61,14 @@ int main(int argc, const char * argv[])
 
 void *  enanito(void * arg)
 {
-    int id = (int) arg;
+    //usleep(rand()%50);
+    int * idptr = (int *) arg;
+    int id = *idptr;
     
     while(1)
     {
         printf("Enano %d dice 'Estoy trabajando en la mina'\n", id);
+        sleep(rand() % 3);
         printf("Enano %d dice 'Quiero sentarme a comer'\n", id);
         sem_wait(&silla);
         printf("Enano %d dice 'Ya estoy sentado, sírveme'\n", id);
@@ -79,7 +82,9 @@ void *  enanito(void * arg)
         pthread_mutex_unlock(&mutex);
         printf("Enano %d dice 'Ya me tocó el turno, estoy comiendo'\n", id);
         sleep(rand()%3);
+        printf("Enano %d dice 'Ya terminé de comer, dejo la silla vacía'\n", id);
         sem_post(&silla);
+        printf("Enano %d dice 'Me voy a la mina'\n", id);
     }
 }
 
@@ -88,13 +93,13 @@ void *  blancanieves(void * arg)
     while(1)
     {
         pthread_mutex_lock(&mutex);
-        if (esperando == 0)
+        if (esperando == 0) // No hay ningún enanito esperando
         {
             pthread_mutex_unlock(&mutex);
             printf("Blancanieves dice 'Me voy de paseo'\n");
             sleep(rand()%3);
         }
-        else {
+        else { // Hay algún enanito esperando
             pthread_mutex_unlock(&mutex);
             printf("Blancanieves dice 'Estoy cocinando para un enano'\n");
             printf("Blancanieves dice 'La comida ya está lista'\n");
