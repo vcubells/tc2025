@@ -8,7 +8,7 @@
 #include <omp.h>
 #include <stdio.h>
 
-#define ELEMENTOS 1000000
+#define ELEMENTOS 1000
 
 int main()
 {
@@ -21,7 +21,7 @@ int main()
     //omp_set_num_threads(8);
 
     /* Inicializar el vector */
-    #pragma omp parallel for
+    #pragma omp parallel for schedule(runtime)
     for (int i = 0; i < ELEMENTOS; i++)
     {
         vector[i] = 1;
@@ -31,7 +31,7 @@ int main()
     
     t_inicial = omp_get_wtime();
     /* Cada hilo tienen una variable tid privada */
-    #pragma omp parallel private(tid) if (ELEMENTOS > 100) //num_threads(4)
+    #pragma omp parallel private(tid) if (ELEMENTOS > 100)  //num_threads(4)
     {
         /* Obtener el thread id */
         tid = omp_get_thread_num();

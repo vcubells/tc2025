@@ -186,6 +186,12 @@
       location = "group:Tema_6_Paralelismo"
       name = "Tema_6_Paralelismo">
       <FileRef
+         location = "group:mpi_scatter/mpi_scatter.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:omp_pi_monte_carlo/omp_pi_monte_carlo.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:pthread_factorial/pthread_factorial.xcodeproj">
       </FileRef>
       <FileRef

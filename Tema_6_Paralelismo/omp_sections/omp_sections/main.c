@@ -53,11 +53,11 @@ int main(int argc, const char * argv[]) {
     
     t_inicio = omp_get_wtime();
 
-    #pragma omp parallel for shared(a,b,c,d) private(i) num_threads(6)
+    #pragma omp parallel for shared(a,b,c,d) private(i) //num_threads(6)
             for (i=0; i < N; i++)
                 c[i] = a[i] + b[i];
        
-    #pragma omp parallel for shared(a,b,c,d) private(i) num_threads(6)
+    #pragma omp parallel for shared(a,b,c,d) private(i) //num_threads(6)
             for (i=0; i < N; i++)
                 d[i] = a[i] * b[i];
 
@@ -68,7 +68,7 @@ int main(int argc, const char * argv[]) {
 
     t_inicio = omp_get_wtime();
 
-    #pragma omp parallel for shared(a,b,c,d) private(i) num_threads(6)
+    #pragma omp parallel for shared(a,b,c,d) private(i) //num_threads(6)
         for (i=0; i < N; i++) {
                 c[i] = a[i] + b[i];
                 d[i] = a[i] * b[i];
