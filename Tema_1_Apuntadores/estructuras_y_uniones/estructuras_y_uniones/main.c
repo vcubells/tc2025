@@ -10,13 +10,13 @@
 #include <string.h>
 
 typedef struct {
-    char nombre[30];
+    char nombre[30];        // 30 + 30 + 4 = 64 bytes
     char apellidos[30];
     int edad;
 } persona;
 
 typedef union {
-    char nombre[30];
+    char nombre[30];        // 30 = 30 bytes
     char apellidos[30];
     int edad;
 } persona_u;
@@ -52,3 +52,10 @@ int main(int argc, const char * argv[])
     return 0;
 }
 
+
+/*
+ SELECT nombre FROM personas;
+ SELECT apellidos FROM personas;
+ SELECT edad FROM personas;
+ 
+ */
