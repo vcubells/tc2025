@@ -24,7 +24,7 @@ int main(int argc, const char * argv[]) {
     scanf("%d", &n);
     
     /* Reservar memoria */
-    int * numeros = (int *) malloc(n * sizeof(int));
+    int * numeros = (int *) malloc(n * sizeof(int)); // malloc, realloc, calloc <-> new / delete
     
     /* Establecer la semmilla del generador de números aleatorios */
     srand((int) time(NULL));
@@ -33,7 +33,7 @@ int main(int argc, const char * argv[]) {
     int * fin = numeros + n;
     
     /* Generar números aleatorios */
-    for (int * aux = numeros; aux < fin; ++aux) {
+    for (int * aux = numeros; aux < fin; ++aux) { /* ¿Por qué no hacer numeros++ ? */
         *aux = rand() % 100;
     }
     
@@ -98,7 +98,7 @@ void imprime_combinado(int * numeros, int n)
 {
     printf("-- Combinada ---\n");
     for (int i = 0; i < n; ++i) {
-        printf("%d\t", *(numeros+i));
+        printf("%d\t", *(numeros+i)); // numeros[i] = *(numeros+i)
     }
     printf("\n");
 }

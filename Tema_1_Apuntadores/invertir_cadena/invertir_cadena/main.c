@@ -12,6 +12,15 @@
 
 void invertir(char *);
 
+//string cadena;
+char * cadena;
+char cadena[10] = "primero\0"; // 7 + nulo
+
+1 2 3 4 5 6 7 0 0 0
+p r i m e r o \0 basura basura
+
+/* Todas las cadenas de caracteres en C terminan con el caracter nulo '\0' */
+
 int main(int argc, char **argv) {
     char * cadena;
     int longitud;

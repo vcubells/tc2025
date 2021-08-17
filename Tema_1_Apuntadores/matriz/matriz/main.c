@@ -14,6 +14,8 @@ void leeMatriz(int * m, int filas, int columnas);
 
 void imprimeMatriz(int * m, int filas, int columnas);
 
+int get_item(int * matriz, int fila, int columna, int numero_columnas);
+
 int main(int argc, const char * argv[]) {
     
     int N;
@@ -27,14 +29,52 @@ int main(int argc, const char * argv[]) {
     
     int * matriz = (int *) malloc(sizeof(int) * N * M);
     
+    //int * matriz = (int *) calloc(N * M, sizeof(int));
+    
     leeMatriz(matriz, N, M);
     imprimeMatriz(matriz, N, M);
     
+    int f = 1;
+    int c = 1;
+    
+    printf("m[1][1] = %d\n", get_item(matriz, f, c, M) );
     
     free(matriz);
     
     return 0;
 }
+
+/*
+   C++ vector<int> v(iniciales = 5, incr = 3); -> malloc(5*sizeof(int))
+   Java Vector<int> v;
+   C# List<int> v;
+ 
+   v.insert() 1 2 3 4 5, 6 -> realloc (iniciales + incr), 7, 8, 9 -> realloc (iniciales + incr)
+   v.push()
+   v.push_back()
+    
+ */
+
+
+int get_item(int * matriz, int fila, int columna, int numero_columnas)
+{
+    return *(matriz + (fila * numero_columnas) + columna);
+}
+
+void imprime_tradicional(int * m, int filas, int columnas)
+{
+    /* Obtener la posición de un elemento
+     item[i][j] = m + (i * columnas) + j
+     */
+    
+    for (int i = 0; i < filas; ++i) {
+        for (int j = 0; j < columnas; ++j) {
+          //  printf("[%d, %d] = %d ", i, j, m[i][j]);
+        }
+        printf("\n");
+    }
+}
+
 
 void leeMatriz(int * m, int filas, int columnas)
 {
