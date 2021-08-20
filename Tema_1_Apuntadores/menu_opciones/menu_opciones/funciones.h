@@ -46,4 +46,9 @@ void pegar(int opcion)
     printf("%d - Pegando el texto...\n", opcion);
 }
 
+void nueva(int opcion)
+{
+    printf("%d - Función nueva...\n", opcion);
+}
+
 #endif /* funciones_h */

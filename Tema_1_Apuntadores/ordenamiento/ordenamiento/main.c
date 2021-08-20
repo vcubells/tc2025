@@ -21,15 +21,16 @@ int main(int argc, const char * argv[]) {
     int * valores = (int *) malloc(N * sizeof(int));
     
     int * p = valores;
+    int * fin = valores + N;
     
     srand((int) time(NULL));
     
-    for (; p < (valores + N); ++p) {
+    for (; p < fin; ++p) {
         *p = rand() % 100;
         printf("%4d", *p);
     }
     
-    ordena(valores, asc);
+    ordena(valores, desc);
     
     
     printf("\n\n--- Ordenados ---\n\n");
@@ -60,6 +61,7 @@ void ordena(int * numeros, int criterio(int, int))
         }
     }
 }
+
 
 int asc(int a, int b)
 {

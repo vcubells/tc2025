@@ -89,7 +89,7 @@ int main(int argc, const char * argv[])
     
     imprimeFloat(vectorf, N);
     
-    sort(&insertionSort, vectorf, N, sizeof(*vectorf), &descFloat, &swapFloat);
+    sort(&selectionSort, vectorf, N, sizeof(*vectorf), &ascFloat, &swapFloat);
     
     printf("\n\n--- Flotantes Ordenados ---\n\n");
     
@@ -229,4 +229,3 @@ void imprimeFloat(float * vector, int count)
     
     printf("\n");
 }
-
