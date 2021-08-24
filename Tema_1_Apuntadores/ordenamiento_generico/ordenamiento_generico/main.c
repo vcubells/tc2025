@@ -27,6 +27,10 @@ void sort(t_sort, void *, size_t , size_t, t_compare, t_swap );
 void insertionSort(void * vector, size_t count, size_t size, t_compare compare, t_swap swap );
 void selectionSort(void * vector, size_t count, size_t size, t_compare compare, t_swap swap );
 
+void quickSort(void * vector, size_t count, size_t size, t_compare compare, t_swap swap );
+void quickSortR(void * vector, size_t count, size_t size, t_compare compare, t_swap swap, void * first, void * last);
+
+
 /* Funciones callback para enteros */
 
 int ascInt(void * , void * );
@@ -66,7 +70,7 @@ int main(int argc, const char * argv[])
     
     imprimeInt(vector, N);
     
-    sort(&selectionSort, vector, N, sizeof(*vector), &ascInt, &swapInt);
+    sort(&quickSort, vector, N, sizeof(*vector), &ascInt, &swapInt);
     
     printf("\n\n--- Enteros Ordenados ---\n\n");
     
@@ -146,6 +150,48 @@ void selectionSort(void * vector, size_t count, size_t size, t_compare compare, 
         
         (*swap)(minimo, aux);
     }
+}
+
+void quickSort(void * vector, size_t count, size_t size, t_compare compare, t_swap swap )
+{
+    void * last = vector + (count * size);
+    quickSortR(vector, count, size, compare, swap, vector, last);
+}
+
+void quickSortR(void * vector, size_t count, size_t size, t_compare compare, t_swap swap, void * first, void * last )
+{
+    void * izquierdo = first;
+    void * derecho = last;
+    
+    //Se selecciona pivote
+    void * pivote = first;
+    
+    if ( first < last) // Paso base
+    {
+        // particion
+        while ( izquierdo < derecho)
+        {
+            while ( (izquierdo < derecho) && !compare(izquierdo, pivote)) izquierdo+=size; // <=
+            while ( compare(derecho, pivote) ) derecho-=size; // >
+            
+            if ( izquierdo < derecho) // se intercambian los contenidos
+            {
+                swap(izquierdo, derecho);
+            }
+        }
+        
+        // Se intercambia el pivote con el elemento de la posición derecha
+        swap(first, derecho);
+        
+        // Paso recursivo
+        quickSortR ( vector, count, size, compare, swap, first, derecho-size);
+        quickSortR ( vector, count, size, compare, swap, izquierdo, last);
+    }
+}
+
+void mergeSort(void * vector, size_t count, size_t size, t_compare compare, t_swap swap )
+{
+
 }
 
 /* Implementación de funciones callback para enteros */
