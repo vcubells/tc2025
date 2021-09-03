@@ -28,7 +28,7 @@ int main(int argc, const char * argv[]) {
         // Estamos en el hijo
         printf("Estamos en el proceso hijo con PID = %d y su padre es PPID = %d \n", \
                getpid(), getppid());
-        exit(0);
+        exit(5);
     }
     else {
         // Estamos en el padre
@@ -47,7 +47,7 @@ int main(int argc, const char * argv[]) {
     }
     
     /* Lo van a imprimir los dos procesos */
-    printf("Estamos en el proceso con PID = %d y su padre es PPID = %d \n", \
+    printf("--->> Estamos en el proceso con PID = %d y su padre es PPID = %d \n", \
                    getpid(), getppid());
     
     return 0;

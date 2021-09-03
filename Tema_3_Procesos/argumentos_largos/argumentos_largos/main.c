@@ -38,7 +38,7 @@ int main(int argc, char * argv[]) {
         /* Variable que almacena el índice de la opción */
         int option_index = 0;
         
-        c = getopt_long (argc, argv, "aib:c:f:",
+        c = getopt_long (argc, argv, "aib:c:f:", // "iab:f:c:
                          long_options, &option_index);
         
         /* -1 indica que no hay más opciones */

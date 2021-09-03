@@ -53,6 +53,11 @@ int main(int argc, char * const * argv) {
             abort ();
     }
     
+    if (aflag == 0) {
+        printf("La opción -a es obligatoria\n");
+        exit(-1);
+    }
+    
     printf ("aflag = %d, bflag = %d, cvalue = %s\n",
             aflag, bflag, cvalue);
     
