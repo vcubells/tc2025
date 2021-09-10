@@ -30,6 +30,7 @@ int main(int argc, char **argv)
         /* Estoy en el hijo */
         printf("Estoy leyendo y soy el hijo ... \n");
         leer(tubo);
+        printf("Soy el proceso hijo y voy a terminar\n");
     }
     else if (pid == -1)
     {
@@ -40,6 +41,8 @@ int main(int argc, char **argv)
         /* Estoy en el padre */
         printf("Estoy escribiendo y soy el padre ... \n");
         escribir(tubo);
+        printf("Soy el proceso padre y espero que termine el hijo\n");
+        wait(NULL);
     }
     
     
@@ -48,28 +51,31 @@ int main(int argc, char **argv)
 
 void leer(int * fd)
 {
-    int c;
+    int c = 0;
     
-    while( 1 )
+    while( c != -1 )
     {
         close(fd[1]);
         read(fd[0], &c, sizeof(int));
-        printf("---  Recibí f(%d) = %lu  \n", c, factorial(c));
+        if (c != -1) {
+            printf("---  Recibí f(%d) = %lu  \n", c, factorial(c));
+        }
     }
-    
 }
+
 void escribir(int * fd)
 {
-    int num;
+    int num = 0;
     
     
-    while(1)
+    while( num != -1)
     {
         printf("Entre un número: ");
         scanf("%d", &num);
         close (fd[0]);
         printf("+++ Envío %d \n", num);
         write(fd[1], &num, sizeof(int));
+        sleep(1);
     }
     
     

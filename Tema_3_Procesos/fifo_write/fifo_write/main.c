@@ -35,7 +35,7 @@ int main(int argc, const char * argv[])
     }
     
     close(fd);
-    //unlink("/Users/vcubells/fifo");
+    unlink("/Users/vcubells/fifo");
     
     return 0;
 }

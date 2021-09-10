@@ -12,7 +12,7 @@
 #include <sys/wait.h>
 #include <time.h>
 
-#define N 100000
+#define N 10000
 
 int suma(int *, int, int);
 void print(int *, int, int);
@@ -22,7 +22,7 @@ int main(int argc, const char * argv[]) {
     pid_t pid;
     int estado;
     
-    srand(time(NULL));
+    srand((unsigned) time(NULL));
     
     int * numeros = (int *) malloc(N * sizeof(int));
     
