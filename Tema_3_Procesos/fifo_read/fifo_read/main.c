@@ -13,6 +13,9 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+
+unsigned long int factorial (int num);
+
 int main(int argc, const char * argv[])
 {
     int fd;
@@ -25,10 +28,20 @@ int main(int argc, const char * argv[])
     while (i != -1) {
         leidos = read(fd, &i, sizeof(int));
         
-        printf("%d\n", i);
+        printf("%d! = %d \n", i, factorial(i));
     }
     
     close(fd);
     
     return 0;
+}
+
+unsigned long int factorial (int num)
+{
+    unsigned long int f = 1;
+    int i;
+    for(i = 2; i <= num; ++i)
+        f *= i;
+    
+    return f;
 }

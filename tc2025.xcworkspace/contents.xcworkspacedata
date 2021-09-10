@@ -57,6 +57,9 @@
       location = "group:Tema_3_Procesos"
       name = "Tema_3_Procesos">
       <FileRef
+         location = "group:suma_pipes/suma_pipes.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:creando_n_hijos/creando_n_hijos.xcodeproj">
       </FileRef>
       <FileRef
