@@ -17,7 +17,7 @@
 
 #define TCP_PORT 8000
 
-int factorial (int num);
+unsigned long long int factorial (int num);
 
 /* reverse:  reverse string s in place */
 void reverse(char s[])
@@ -32,7 +32,7 @@ void reverse(char s[])
     }
 }
 
-void itoa(int n, char s[])
+void itoa(unsigned long long int n, char s[])
 {
     int i, sign;
     
@@ -85,7 +85,7 @@ int main(int argc, const char * argv[]) {
     /* Aceptar conexiones de los clientes */
     cliente = accept(servidor, (struct sockaddr *) &direccion, &tamano);
     
-    int fact;
+    unsigned long long int fact;
     
     if (cliente >= 0) {
         printf("Aceptando conexiones en %s:%d \n",
@@ -107,8 +107,11 @@ int main(int argc, const char * argv[]) {
             /* Convertir el factorial a un string */
             itoa(fact, buffer);
             
+            /* Mostrar por pantalla el factorial */
+            printf("Factorial de %d : %s\n", numero, buffer);
+            
             /* Escribir en el socket */
-            write(cliente, buffer, sizeof(int));
+            write(cliente, buffer, sizeof(buffer));
         }
     }
     
@@ -121,9 +124,9 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
-int factorial (int num)
+unsigned long long int factorial (int num)
 {
-    int f = 1;
+    unsigned long long int f = 1;
     int i;
     for(i = 2; i <= num; ++i)
         f *= i;

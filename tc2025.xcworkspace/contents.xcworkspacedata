@@ -57,6 +57,9 @@
       location = "group:Tema_3_Procesos"
       name = "Tema_3_Procesos">
       <FileRef
+         location = "group:suma_sockets/suma_sockets.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:suma_pipes/suma_pipes.xcodeproj">
       </FileRef>
       <FileRef
@@ -105,6 +108,9 @@
    <Group
       location = "group:Tema_4_Sen&#x303;ales"
       name = "Tema_4_Sen&#x303;ales">
+      <FileRef
+         location = "group:ejercicio_clase/ejercicio_clase.xcodeproj">
+      </FileRef>
       <FileRef
          location = "group:ejercicio_4/ejercicio_4.xcodeproj">
       </FileRef>
