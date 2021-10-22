@@ -75,7 +75,7 @@ void *  enanito(void * arg)
         pthread_mutex_lock(&mutex);
         esperando += 1;
         pthread_mutex_unlock(&mutex);
-        
+        /* Blancanieves le sirve */
         sem_wait(&turno);
         pthread_mutex_lock(&mutex);
         esperando -= 1;

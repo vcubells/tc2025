@@ -21,6 +21,7 @@ int main(int argc, const char * argv[])
     int i;
     
     sigemptyset(&conjunto);
+    // sigfillset(&conjunto);
     
     sigaddset(&conjunto, SIGINT);
     
@@ -33,7 +34,7 @@ int main(int argc, const char * argv[])
     for( i= 0; i < 10; ++i)
     {
         printf("Las señales SIGINT y SIGTSTP están bloqueadas ... \n");
-        sleep(1);
+        sleep(3);
         sigpending(&pendientes);
         
         if (sigismember(&pendientes, SIGINT))

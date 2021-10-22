@@ -14,7 +14,7 @@
 
 void gestor_ctrlz(int sid)
 {
-    printf("Soy el procedo con PID %d y estoy oprimiste Ctrl + Z\n", getpid());
+    printf("Soy el procedo con PID %d y oprimiste Ctrl + Z\n", getpid());
 }
 
 int main(int argc, const char * argv[])

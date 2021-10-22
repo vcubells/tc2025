@@ -47,6 +47,8 @@ int main(int argc, const char * argv[]) {
         }
         
         ++babuinos_creados;
+        
+        usleep(rand() % 5000);
     }
     
     /* Adjuntar los hilos */
@@ -65,6 +67,7 @@ void * babuino_este(void * id)
      * está ocupado por babuinos en el mismo sentido
      * Si está vacío, o van en el mismo sentido, avanza
      */
+    
     printf("(E) Llega un babuino hacia el este\n");
     
     pthread_mutex_lock(&mutex);
@@ -85,7 +88,7 @@ void * babuino_este(void * id)
         /* Babuino sale del puente */
         --babuinos_hacia_este;
         
-        --babuinos_en_el_puente;
+        --babuinos_en_el_puente;clear
         
         printf("(E) Sale un babuino hacia el este -->\n");
         
@@ -118,6 +121,7 @@ void * babuino_oeste(void * id)
      * está ocupado por babuinos en el mismo sentido
      * Si está vacío, o van en el mismo sentido, avanza
      */
+    
     printf("(O) Llega un babuino hacia el oeste\n");
     
     pthread_mutex_lock(&mutex);

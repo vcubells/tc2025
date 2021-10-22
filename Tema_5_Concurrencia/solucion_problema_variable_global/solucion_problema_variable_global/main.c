@@ -20,7 +20,8 @@
 #define OPERACIONES 1000000
 #define NHILOS 2
 
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mutex_s = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mutex_r = PTHREAD_MUTEX_INITIALIZER;
 
 int suma = 0;
 int resta = OPERACIONES;
@@ -35,13 +36,17 @@ void * sumar(void * arg)
     for (i = 0; i < OPERACIONES; ++i) {
         
         /* Inicia Región crítica */
-        pthread_mutex_lock(&mutex); // DOWN
+        pthread_mutex_lock(&mutex_s); // DOWN
         
         temp = suma;
         /* Podría haber un cambio de contexto */
         usleep(rand() % 10);
         
         suma = temp + 1;
+        
+        pthread_mutex_unlock(&mutex_s);
+        
+        pthread_mutex_lock(&mutex_r);
         
         temp = resta;
         
@@ -50,7 +55,7 @@ void * sumar(void * arg)
         resta = temp + 1 ;
         
         /* Termina región crítica */
-        pthread_mutex_unlock(&mutex); // UP
+        pthread_mutex_unlock(&mutex_r); // UP
     }
     
     pthread_exit(0);
@@ -66,13 +71,17 @@ void * restar(void * arg)
     for (i = 0; i < OPERACIONES; ++i) {
         
         /* Inicia Región crítica */
-        pthread_mutex_lock(&mutex);
+        pthread_mutex_lock(&mutex_s);
         
         temp = suma;
         
         /* Podría haber un cambio de contexto */
         usleep(rand() % 10);
         suma = temp - 1;
+        
+        pthread_mutex_unlock(&mutex_s);
+        
+        pthread_mutex_lock(&mutex_r);
         
         temp = resta;
         
@@ -81,7 +90,7 @@ void * restar(void * arg)
         resta = temp - 1 ;
         
         /* Termina región crítica */
-        pthread_mutex_unlock(&mutex);
+        pthread_mutex_unlock(&mutex_r);
     }
     
     

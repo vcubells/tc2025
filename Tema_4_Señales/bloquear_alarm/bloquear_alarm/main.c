@@ -8,6 +8,8 @@
 
 #include <stdio.h>
 #include <signal.h>
+#include <unistd.h>
+
 
 void gestor(int s)
 {
@@ -17,12 +19,12 @@ void gestor(int s)
 int main(int argc, const char * argv[])
 {
     sigset_t conjunto;
-    
+
     sigemptyset(&conjunto);
-    
+
     sigaddset(&conjunto, SIGALRM);
     
-    //sigprocmask(SIG_BLOCK, &conjunto, NULL);
+    sigprocmask(SIG_BLOCK, &conjunto, NULL);
     
     signal(SIGALRM, gestor);
     
@@ -30,7 +32,7 @@ int main(int argc, const char * argv[])
     
     //sleep(12);
     
-    //sigprocmask(SIG_UNBLOCK, &conjunto, NULL);
+    sigprocmask(SIG_UNBLOCK, &conjunto, NULL);
     
     while(1);
     

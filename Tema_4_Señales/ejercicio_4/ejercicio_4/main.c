@@ -23,9 +23,11 @@ void contar(char * texto,  void (* handler_t)(int))
 {
     struct sigaction gestor;
     
-    gestor.sa_handler = handler_t ; // signal(SIGINT, handler_t);
+    //gestor.sa_handler = handler_t ; // signal(SIGINT, handler_t);
     
-    sigaction(SIGINT, &gestor, NULL);
+    signal(SIGINT, handler_t);
+    
+    //sigaction(SIGINT, &gestor, NULL);
     
     int i = 1;
     
@@ -39,10 +41,10 @@ void contar(char * texto,  void (* handler_t)(int))
 int main(int argc, const char * argv[]) {
     
     /* Obtener manejador previo */
-    printf("Guardando manejador inicial...\n");
-    struct sigaction gestor;
+    //printf("Guardando manejador inicial...\n");
+    //struct sigaction gestor;
     
-    sigaction(SIGINT, NULL, &gestor);
+    //sigaction(SIGINT, NULL, &gestor);
     
     /* Bloque 1 Contando ovejitas */
     contar("ovejitas", gestor_ctrlc1);
@@ -55,7 +57,7 @@ int main(int argc, const char * argv[]) {
     
     /* Restaurar manejador inicial */
     printf("Restaurando manejador inicial...\n");
-    sigaction(SIGINT, &gestor, NULL);
+    //sigaction(SIGINT, &gestor, NULL);
     
     return 0;
 }

@@ -14,14 +14,12 @@
 
 #define N 100
 
-
 typedef struct {
     int id;
     int random;
 } data;
 
 void * suma(void * arg);
-
 
 int main(int argc, const char * argv[]) {
     
@@ -60,7 +58,6 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
-
 void * suma(void * arg)
 {
     sleep(rand() %10);
@@ -68,5 +65,4 @@ void * suma(void * arg)
     printf("H - Soy el hilo %d\n", arg);
 
     pthread_exit(NULL);
-
 }

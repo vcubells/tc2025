@@ -17,7 +17,7 @@ int main(int argc, const char * argv[])
     sigemptyset(&ninguna);
     sigfillset(&todas);
     
-    sigaddset(&ninguna, SIGINT);
+    //sigaddset(&ninguna, SIGINT);
     
     
     if (sigismember(&ninguna, SIGINT))
@@ -25,7 +25,7 @@ int main(int argc, const char * argv[])
     else
         printf("SIGINT no pertenece al conjunto ninguna \n");
     
-    sigdelset(&todas, SIGINT);
+    //sigdelset(&todas, SIGINT);
     
     if (sigismember(&todas, SIGINT))
         printf("SIGINT pertenece al conjunto todas \n");

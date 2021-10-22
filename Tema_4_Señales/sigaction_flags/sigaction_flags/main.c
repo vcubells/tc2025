@@ -76,5 +76,7 @@ int main(int argc, const char * argv[])
     
     printf("Has intentado cortar %d veces.\n", numcortes);
     
+    //while(1);
+    
     exit(0); 
 }
