@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <omp.h>
 
-#define N 1000000
+#define N 1000003
 
 int main(int argc, const char * argv[]) {
     int i;
@@ -18,21 +18,21 @@ int main(int argc, const char * argv[]) {
     
     inicio = omp_get_wtime();
     
-    #pragma omp parallel private(i)
-    {
-        int tid = omp_get_thread_num();
+    //#pragma omp parallel private(i)
+    //{
+       // int tid = omp_get_thread_num();
         
-        #pragma omp for schedule(guided,1000) private(i) reduction(+:suma)
+        #pragma omp parallel for private(i) reduction(+:suma)
         for (i = 0; i < N; ++i) {
             suma += 1;
         }
         
-        printf("Soy el hilo %d y mi Suma = %d \n", tid, suma);
-    }
+      //  printf("Soy el hilo %d y mi Suma = %d \n", tid, suma);
+   // }
     
     fin = omp_get_wtime();
     
-    printf("Tiempo  = %f \n", fin-inicio);
+    printf("Tiempo  = %f , Suma = %d\n", fin-inicio, suma);
     
     return 0;
 }

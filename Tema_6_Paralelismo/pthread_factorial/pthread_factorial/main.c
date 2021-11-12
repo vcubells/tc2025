@@ -17,6 +17,62 @@ int N = 20;
 /* Vector de factoriales parciales */
 long long int * factoriales;
 
+int factorial(int n)
+{
+    int fact = 1;
+    
+    for (int = 2; i <= n; ++i) {
+        fact *= i
+    }
+    
+    return fact;
+}
+
+//int X = 1;
+//
+//void factorial_con_bloqueos(int id)
+//{
+//    int fact = 1;
+//
+//    int inicio = id;
+//    int final = id + n/4;
+//
+//    for (int = inicio; i <= final; ++i) {
+//        fact *= i
+//    }
+//
+//    /* Región crítica */
+//    pthread_mutex_lock();
+//    X *= fact;
+//    pthread_mutex_unlock();
+//}
+//
+//#define NHILOS 4
+//int parciales[NHILOS];
+//
+//void factorial_sin_bloqueos(int id)
+//{
+//    int fact = 1;
+//
+//    int inicio = id;
+//    int final = id + n/4;
+//
+//    for (int = inicio; i <= fin; ++i) {
+//        fact *= i
+//    }
+//
+//    parciales[id] = fact;
+//}
+
+/*
+ Reducción
+ 
+ for (int i = 0; i < NHILOS; i++)
+ {
+    X *= parciales[i];
+ }
+ */
+
 void * factorial_paralela(void * tid)
 {
     int id = (int *) tid;

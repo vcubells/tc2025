@@ -10,7 +10,7 @@
 
 int main(int argc, const char *argv[])
 {
-    long n = 1 << 20; // 1M
+    long n = 1 << 30; // 1M
 
     double h = 1.0 / (double)n;
 

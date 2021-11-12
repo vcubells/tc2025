@@ -13,6 +13,8 @@
 void inicializa(double * vector, long int n)
 {
     double * fin = vector + n;
+    
+#pragma omp parallel for shared(vector, fin)
     for (double * aux = vector; aux < fin; ++aux) {
         *aux = 1.; //(double) rand() / RAND_MAX;
     }
@@ -23,16 +25,13 @@ double suma(double * vector, long int n, int nhilos)
     int i;
     double suma = 0.;
     
-    #pragma omp parallel private(i) shared(vector, n, suma)  num_threads(nhilos) if (n > 1000)
-    {
-        
-        /* Paralelizar la suma */
-        #pragma omp for reduction(+:suma)
-        for (i = 0; i < n; ++i) {
-            suma += *(vector + i);
-        }
-
-    } /* Join automático */
+    /* Paralelizar la suma */
+#pragma omp parallel for private(i) shared(vector, n)  num_threads(nhilos) if (n > 1000) reduction(+:suma)
+    for (i = 0; i < n; ++i) {
+        suma += *(vector + i);
+    }
+    
+    /* Join automático */
     
     return suma;
     
@@ -42,6 +41,7 @@ char * get_schedule_kind(omp_sched_t kind)
 {
     switch (kind) {
         case omp_sched_static:
+        case omp_sched_static + omp_sched_monotonic:
             return "STATIC";
             break;
         case omp_sched_dynamic:
@@ -54,8 +54,7 @@ char * get_schedule_kind(omp_sched_t kind)
             return "AUTO";
             break;
     }
-    
-    return "";
+    return "OTHER";
 }
 
 int main(int argc, const char * argv[]) {
@@ -81,11 +80,9 @@ int main(int argc, const char * argv[]) {
     /* Inicializar el vector */
     inicializa(vector, N);
     
-    omp_set_schedule(omp_sched_static, 1000);
+    //omp_set_schedule(omp_sched_static, 1000);
     
-    
-    
-    printf("Procs = %d, Threads = %d\n", omp_get_num_procs(), omp_get_num_threads() );
+    printf("Procs = %d, Max Threads = %d, Threads = %d\n", omp_get_num_procs(), omp_get_max_threads(), omp_get_num_threads() );
     double t_inicio = omp_get_wtime();
     
     suma_global = suma(vector, N, NHILOS);
