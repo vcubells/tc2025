@@ -10,7 +10,7 @@
 
 #define MAXSIZE 100000
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char * argv[]) 
 {
     int myid, numprocs;
     int data[MAXSIZE];
