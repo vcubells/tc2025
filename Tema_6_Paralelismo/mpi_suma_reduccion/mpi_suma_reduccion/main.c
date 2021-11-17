@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
     
     for(i = 0; i < x; i++) {
         // Poner un sleep()
-        myresult += data[i];
+        myresult += data_rec[i];
     }
     printf("Yo soy el procesador %d (%s)  y mi suma = %d\n", myid , hostname, myresult);
     
