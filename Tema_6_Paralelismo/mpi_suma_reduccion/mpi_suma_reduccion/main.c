@@ -9,7 +9,7 @@
 #include "mpi.h"
 #include <stdio.h>
 
-#define MAXSIZE 1000
+#define MAXSIZE 100000
 
 int main(int argc, char *argv[])
 {
@@ -37,15 +37,23 @@ int main(int argc, char *argv[])
     if (myid == 0 ) start = MPI_Wtime();
     
     /* Broadcast a todos los procesos */
-    MPI_Bcast(data, n, MPI_INT, 0, MPI_COMM_WORLD);
+//    MPI_Bcast(data, n, MPI_INT, 0, MPI_COMM_WORLD);
+//
+//    /* Porción de data  que va a procesar cada procesador*/
+//    x = n/numprocs;
+//    low = myid * x;
+//    high = low + x;
+//
+//    if (myid == numprocs - 1) { high = n; }
+//  for(i = low; i < high; i++) {
     
-    /* Porción de data  que va a procesar cada procesador*/
     x = n/numprocs;
-    low = myid * x;
-    high = low + x;
+
+    int data_rec[x];
+
+    MPI_Scatter(data, x, MPI_INT, data_rec, x, MPI_INT,0, MPI_COMM_WORLD);
     
-    if (myid == numprocs - 1) { high = n; }
-    for(i = low; i < high; i++) {
+    for(i = 0; i < x; i++) {
         // Poner un sleep()
         myresult += data[i];
     }
